@@ -1,19 +1,18 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import MapContainer from "@/components/MapContainer.vue";
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="OEI logo" class="logo" src="./assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+<!--    TODO: add a button for uploading geojson -->
     </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <MapContainer />
   </main>
 </template>
 
@@ -31,11 +30,10 @@ header {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
+    flex-direction: column;
+    height: 100vh;
+    width: 25vw;
+    padding: 2rem;
   }
 
   header .wrapper {
