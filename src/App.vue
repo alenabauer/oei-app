@@ -1,10 +1,40 @@
 <script setup>
 import MapContainer from "@/components/MapContainer.vue";
+
+// an example geojson for testing
+const geojson = {
+  type: 'Feature',
+  properties: {},
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [
+          -27.0703125,
+          43.58039085560784
+        ],
+        [
+          -28.125,
+          23.563987128451217
+        ],
+        [
+          -10.8984375,
+          32.84267363195431
+        ],
+        [
+          -27.0703125,
+          43.58039085560784
+        ]
+      ]
+    ]
+  }
+}
+
 </script>
 
 <template>
   <header>
-    <img alt="OEI logo" class="logo" src="./assets/logo.png" width="125" height="125" />
+    <img alt="OEI logo" class="logo" src="./assets/logo.png" width="75" height="75" />
 
     <div class="wrapper">
 <!--    TODO: add a button for uploading geojson -->
@@ -12,7 +42,7 @@ import MapContainer from "@/components/MapContainer.vue";
   </header>
 
   <main>
-    <MapContainer />
+    <MapContainer :geojson="geojson" />
   </main>
 </template>
 
