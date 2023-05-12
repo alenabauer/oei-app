@@ -1,3 +1,9 @@
+<template>
+  <div ref="map-root"
+       style="width: 100%; height: 100%">
+  </div>
+</template>
+
 <script>
 import View from 'ol/View'
 import Map from 'ol/Map'
@@ -80,9 +86,3 @@ export default {
   }
 }
 </script>
-
-<template>
-  <div ref="map-root"
-       style="width: 100%; height: 100%">
-  </div>
-</template>

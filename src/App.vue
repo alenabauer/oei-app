@@ -1,43 +1,9 @@
-<script setup>
-import MapContainer from "@/components/MapContainer.vue";
-
-// an example geojson for testing
-const geojson = {
-  type: 'Feature',
-  properties: {},
-  geometry: {
-    type: 'Polygon',
-    coordinates: [
-      [
-        [
-          -27.0703125,
-          43.58039085560784
-        ],
-        [
-          -28.125,
-          23.563987128451217
-        ],
-        [
-          -10.8984375,
-          32.84267363195431
-        ],
-        [
-          -27.0703125,
-          43.58039085560784
-        ]
-      ]
-    ]
-  }
-}
-
-</script>
-
 <template>
   <header>
     <img alt="OEI logo" class="logo" src="./assets/logo.png" width="75" height="75" />
 
     <div class="wrapper">
-<!--    TODO: add a button for uploading geojson -->
+      <FileUpload @data-upload="handleUpload" />
     </div>
   </header>
 
@@ -45,6 +11,32 @@ const geojson = {
     <MapContainer :geojson="geojson" />
   </main>
 </template>
+
+<script>
+import MapContainer from "@/components/MapContainer.vue";
+import FileUpload from "@/components/FileUpload.vue";
+import { ref } from "vue";
+
+export default {
+  components: {
+    MapContainer,
+    FileUpload,
+  },
+  setup() {
+    const geojson = ref(null);
+
+    const handleUpload = (data) => {
+      geojson.value = data;
+    };
+
+    return {
+      geojson,
+      handleUpload,
+    };
+  },
+};
+
+</script>
 
 <style scoped>
 header {
@@ -62,7 +54,7 @@ header {
     place-items: center;
     flex-direction: column;
     height: 100vh;
-    width: 25vw;
+    width: 30vw;
     padding: 2rem;
   }
 
