@@ -4,6 +4,12 @@
 
     <div class="wrapper">
       <FileUpload @data-upload="handleUpload" />
+      <SearchForm @search="searchApi" />
+      <ul>
+        <li v-for="result in searchResults" :key="result.id">
+          {{ result.title?.en }}
+        </li>
+      </ul>
     </div>
   </header>
 
@@ -15,23 +21,83 @@
 <script>
 import MapContainer from "@/components/MapContainer.vue";
 import FileUpload from "@/components/FileUpload.vue";
+import SearchForm from "@/components/SearchForm.vue";
 import { ref } from "vue";
+import axios from "axios";
+import EuropaDataService from "@/api/europaDataService";
+
+function calculateMinMaxCoordinates(geojson) {
+  let minLon = Infinity;
+  let minLat = Infinity;
+  let maxLon = -Infinity;
+  let maxLat = -Infinity;
+
+  const processCoordinates = (coordinates) => {
+    coordinates.forEach((ring) => {
+      ring.forEach(([lon, lat]) => {
+        // Update minimum and maximum values
+        minLon = Math.min(minLon, lon);
+        minLat = Math.min(minLat, lat);
+        maxLon = Math.max(maxLon, lon);
+        maxLat = Math.max(maxLat, lat);
+      });
+    });
+  };
+
+  const geometry = geojson.geometry;
+  const type = geometry.type;
+
+  if (type === "Polygon") {
+    processCoordinates(geometry.coordinates);
+  } else if (type === "MultiPolygon") {
+    geometry.coordinates.forEach((coordinates) => {
+      processCoordinates(coordinates);
+    });
+  }
+
+  return {
+    minLon,
+    minLat,
+    maxLon,
+    maxLat,
+  };
+}
+
 
 export default {
   components: {
     MapContainer,
     FileUpload,
+    SearchForm,
   },
   setup() {
     const geojson = ref(null);
+    const searchResults = ref(null);
 
-    const handleUpload = (data) => {
+    const handleUpload = async (data) => {
       geojson.value = data;
     };
+
+    const searchApi = async (query) => {
+      const searchParams = {
+          "boundingBox": geojson.value ? calculateMinMaxCoordinates(geojson.value) : {},
+      }
+      try {
+        const { results } = await EuropaDataService.search(query, searchParams);
+        console.log('query', query)
+        console.log('searchParams', searchParams)
+        console.log('results', results);
+        searchResults.value = results;
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
     return {
       geojson,
       handleUpload,
+      searchApi,
+      searchResults,
     };
   },
 };
