@@ -2,15 +2,9 @@
   <header>
     <img alt="OEI logo" class="logo" src="./assets/logo.png" width="75" height="75" />
 
-    <div class="wrapper">
-      <FileUpload @data-upload="handleUpload" />
-      <SearchForm @search="searchApi" />
-      <ul>
-        <li v-for="result in searchResults" :key="result.id">
-          {{ result.tags?.name }}
-        </li>
-      </ul>
-    </div>
+    <FileUpload @data-upload="handleUpload" />
+    <SearchForm @search="searchApi" />
+    <SearchResultsList :searchResults="searchResults" />
   </header>
 
   <main>
@@ -23,8 +17,8 @@ import MapContainer from "@/components/MapContainer.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import SearchForm from "@/components/SearchForm.vue";
 import { ref } from "vue";
-import axios from "axios";
 import EuropaDataService from "@/api/europaDataService";
+import SearchResultsList from "@/components/SearchResultsList.vue";
 
 function calculateMinMaxCoordinates(geojson) {
   let minLon = Infinity;
@@ -62,6 +56,7 @@ function calculateMinMaxCoordinates(geojson) {
 
 export default {
   components: {
+    SearchResultsList,
     MapContainer,
     FileUpload,
     SearchForm,
@@ -111,14 +106,8 @@ header {
     place-items: center;
     flex-direction: column;
     height: 100vh;
-    width: 30vw;
+    width: 40vw;
     padding: 2rem;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>
