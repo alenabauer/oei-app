@@ -7,7 +7,7 @@
       <SearchForm @search="searchApi" />
       <ul>
         <li v-for="result in searchResults" :key="result.id">
-          {{ result.title?.en }}
+          {{ result.tags?.name }}
         </li>
       </ul>
     </div>
@@ -55,12 +55,8 @@ function calculateMinMaxCoordinates(geojson) {
     });
   }
 
-  return {
-    minLon,
-    minLat,
-    maxLon,
-    maxLat,
-  };
+  // south, west, north, east
+  return `${minLat},${minLon},${maxLat},${maxLon}`;
 }
 
 
@@ -79,15 +75,10 @@ export default {
     };
 
     const searchApi = async (query) => {
-      const searchParams = {
-          "boundingBox": geojson.value ? calculateMinMaxCoordinates(geojson.value) : {},
-      }
+      const bbox = geojson.value ? calculateMinMaxCoordinates(geojson.value) : '0,0,0,0';
       try {
-        const { results } = await EuropaDataService.search(query, searchParams);
-        console.log('query', query)
-        console.log('searchParams', searchParams)
-        console.log('results', results);
-        searchResults.value = results;
+        const { elements } = await EuropaDataService.search(query, bbox);
+        searchResults.value = elements;
       } catch (error) {
         console.error(error);
       }

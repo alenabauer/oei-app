@@ -2,30 +2,34 @@ import axios from "axios";
 
 class EuropaDataService {
     constructor() {
-        this.baseURL = "https://data.europa.eu";
+        this.baseURL = "https://overpass-api.de/api/interpreter";
         this.headers = {
             "Content-Type": "application/json",
         };
     }
 
-    // documentation for other search parameters can be found at https://data.europa.eu/api/hub/search/
-    // other APIS provided by data.europa.eu are listed here: https://dataeuropa.gitlab.io/data-provider-manual/data.europa.eu-APIs/
-    async search(query, searchParams) {
-        const url = `${this.baseURL}/api/hub/search/search`;
-        const body = {
-            q: query,
-            searchParams,
-        };
+    async search(query, bbox) {
+        // search Overpass API for various amenities, within the given bounding box
+        const request = `${this.baseURL}?[out:json];node[amenity=${query}](${bbox});out;`;
 
         try {
-            const { data } = await axios.post(url, body, {
+            const { data } = await axios.get(request, {
                 headers: this.headers,
             });
-            console.log('response.data', data.result)
-            return data.result;
+            console.log('response.data', data);
+            return data;
         } catch (error) {
             console.error(error);
             throw new Error("An error occurred while searching.");
+        }
+    }
+
+    getDefaultBody() {
+        return {
+            page: 1,
+            includes: [
+                "title",
+            ],
         }
     }
 }
