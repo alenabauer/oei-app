@@ -7,7 +7,7 @@
   --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
 
   --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: var(--vt-c-white);
+  --vt-c-text-dark-2: #97C3D5;
 }
 
 /* semantic color variables for this project */
@@ -23,6 +23,7 @@
   /*--color-border-hover: var(--vt-c-divider-light-1);*/
 
   --color-heading: var(--vt-c-text-dark-2);
+  --color-link: var(--vt-c-text-dark-2);
   --color-text: var(--vt-c-text-dark-1);
 
   --section-gap: 160px;

@@ -22,9 +22,11 @@ export default {
 .search_results_list {
   list-style: none;
   width: 100%;
-  padding: 0;
+  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: scroll;
+  scroll-behavior: auto;
 }
 </style>
