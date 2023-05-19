@@ -1,6 +1,8 @@
 <template>
   <li>
-    {{ searchResult.tags?.name }}
+    <div class="search_result_item">
+      {{ searchResult.tags?.name }}
+    </div>
   </li>
 </template>
 <script>
@@ -14,3 +16,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .search_result_item {
+    background-color: var(--color-blue);
+    padding: 0.5rem 1rem;
+  }
+</style>

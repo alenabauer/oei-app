@@ -1,7 +1,6 @@
 <template>
   <header>
-    <img alt="OEI logo" class="logo" src="./assets/logo.png" width="75" height="75" />
-
+    <HeaderLogo />
     <FileUpload @data-upload="handleUpload" />
     <SearchForm @search="searchApi" />
     <SearchResultsList :searchResults="searchResults" />
@@ -19,6 +18,7 @@ import SearchForm from "@/components/SearchForm.vue";
 import { ref } from "vue";
 import EuropaDataService from "@/api/europaDataService";
 import SearchResultsList from "@/components/SearchResultsList.vue";
+import HeaderLogo from "@/components/HeaderLogo.vue";
 
 function calculateMinMaxCoordinates(geojson) {
   let minLon = Infinity;
@@ -60,6 +60,7 @@ export default {
     MapContainer,
     FileUpload,
     SearchForm,
+    HeaderLogo,
   },
   setup() {
     const geojson = ref(null);
@@ -95,15 +96,9 @@ header {
   line-height: 1.5;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
     flex-direction: column;
     height: 100vh;
     width: 40vw;

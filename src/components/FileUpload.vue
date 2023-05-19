@@ -43,7 +43,8 @@ export default {
 
 <style scoped>
 .file-upload__wrapper {
-  padding: 2rem;
+  padding: 2rem 0;
+  width: 100%;
 }
 .file_upload__header {
   margin-bottom: 1rem;
