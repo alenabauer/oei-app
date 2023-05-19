@@ -8,7 +8,15 @@
             placeholder="Search"
             v-model="query"
             @keyup.enter="handleSearch"
+            @keyup="handleChange"
         />
+        <ul v-if="showSuggestions" class="search-form__suggestions">
+          <li
+              v-for="type in types.value"
+              :key="type"
+              @click="handleSelect(type)"
+          >{{type.value}}</li>
+        </ul>
       </div>
       <div class="search-form__button">
         <button @click="handleSearch">
@@ -19,18 +27,38 @@
   </div>
 </template>
 <script>
+import TagInfoService from "@/api/tagInfoService";
+
 export default {
   name: 'SearchForm',
   data() {
     return {
       query: '',
+      amenityTypes: [],
+      showSuggestions: false
     }
   },
   methods: {
     handleSearch() {
+      this.showSuggestions = false
       this.$emit('search', this.query)
     },
+    handleChange() {
+      this.showSuggestions = true
+      TagInfoService.getValidTagValues("amenity", this.query).then((response) => {
+        this.amenityTypes.value = response.data
+      })
+    },
+    handleSelect(type) {
+      this.query = type.value
+      this.handleSearch()
+    }
   },
+  computed: {
+    types() {
+      return this.amenityTypes
+    }
+  }
 }
 </script>
 <style scoped>
@@ -42,7 +70,7 @@ export default {
 }
 .search-form {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   margin-bottom: 1rem;
 }
@@ -58,6 +86,29 @@ export default {
 .search-form__input input:focus {
   outline: none;
   border: 1px solid var(--color-blue-light);
+}
+.search-form__suggestions {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--vt-c-white);
+  color: var(--color-blue-dark);
+  border: 1px solid var(--color-blue-dark);
+  opacity: 0.9;
+  padding: 0;
+}
+.search-form__suggestions li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.search-form__suggestions li:hover {
+  opacity: 1;
+  background-color: white;
 }
 .search-form__button button {
   padding: 0.5rem 1rem;

@@ -4,7 +4,7 @@
         class="search_result_item__preview"
         @click="toggleExpanded()"
     >
-      <span>{{ searchResult.tags?.name }}</span>
+      <span>{{ name }}</span>
       <template v-if="hasInfo()">
         <font-awesome-icon v-if="expanded" icon="fa-solid fa-chevron-up" />
         <font-awesome-icon v-else icon="fa-solid fa-chevron-down" />
@@ -75,6 +75,9 @@ export default {
     },
     email() {
       return this.searchResult.tags["contact:email"];
+    },
+    name() {
+      return this.searchResult.tags["name:en"] || this.searchResult.tags["name"];
     }
   },
 };

@@ -16,7 +16,7 @@ import MapContainer from "@/components/MapContainer.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import SearchForm from "@/components/SearchForm.vue";
 import { ref } from "vue";
-import EuropaDataService from "@/api/europaDataService";
+import OverpassApiService from "@/api/OverpassApiService";
 import SearchResultsList from "@/components/SearchResultsList.vue";
 import HeaderLogo from "@/components/HeaderLogo.vue";
 
@@ -71,9 +71,9 @@ export default {
     };
 
     const searchApi = async (query) => {
-      const bbox = geojson.value ? calculateMinMaxCoordinates(geojson.value) : '0,0,0,0';
+      const bbox = geojson.value ? `(${calculateMinMaxCoordinates(geojson.value)})` : "(-90,-180,90,180)";
       try {
-        const { elements } = await EuropaDataService.search(query, bbox);
+        const { elements } = await OverpassApiService.search(query, bbox);
         searchResults.value = elements;
       } catch (error) {
         console.error(error);
@@ -101,7 +101,6 @@ header {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 40vw;
     padding: 2rem;
   }
 }

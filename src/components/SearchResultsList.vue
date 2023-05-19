@@ -1,7 +1,8 @@
 <template>
-  <ul class="search_results_list">
+  <ul v-if="searchResults && searchResults.length > 0" class="search_results_list">
     <SearchResultItem v-for="result in searchResults" :key="result.id" :search-result="result"/>
   </ul>
+  <p v-if="searchResults && searchResults.length == 0">No results.</p>
 </template>
 <script>
 import SearchResultItem from "./SearchResultItem.vue";
@@ -28,5 +29,6 @@ export default {
   gap: 0.5rem;
   overflow: scroll;
   scroll-behavior: auto;
+  margin-bottom: 1rem;
 }
 </style>
