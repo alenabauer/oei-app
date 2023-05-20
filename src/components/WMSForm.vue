@@ -12,6 +12,14 @@
               <label for="cloudCoverage">Max. Cloud Coverage:</label>
               <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" />
             </div>
+            <div class="wms-form__input">
+              <label for="startDate">Start Date:</label>
+              <input id="startDate" type="date" v-model="requestParams.startDate" />
+            </div>
+            <div class="wms-form__input">
+              <label for="endDate">End Date:</label>
+              <input id="endDate" type="date" v-model="requestParams.endDate" />
+            </div>
             <div class="wms-form__button">
                 <button type="submit">Submit</button>
             </div>
@@ -38,6 +46,8 @@
           requestParams: {
               layer: 'AGRICULTURE',
               cloudCoverage: 0,
+              startDate: '2022-01-01',
+              endDate: '2023-05-01',
           },
         }
     },

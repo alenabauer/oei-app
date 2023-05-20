@@ -30,8 +30,8 @@ class SentinelApiService {
     }
 
     async getImage(bbox, params) {
-        const { layer, cloudCoverage } = params;
-        const requestUrl = `${this.baseURL}/ogc/wms/${this.wmsInstanceId}?REQUEST=GetMap&CRS=EPSG:4326&BBOX=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&LAYERS=${layer}&MAXCC=${cloudCoverage}&WIDTH=320&HEIGHT=320&FORMAT=image/jpeg&TIME=2018-03-29/2022-05-29`;
+        const { layer, cloudCoverage, startDate, endDate } = params;
+        const requestUrl = `${this.baseURL}/ogc/wms/${this.wmsInstanceId}?REQUEST=GetMap&CRS=EPSG:4326&BBOX=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&LAYERS=${layer}&MAXCC=${cloudCoverage}&WIDTH=320&HEIGHT=320&FORMAT=image/jpeg&TIME=${startDate}/${endDate}`;
         try {
             const response = await this.instance.get(requestUrl, {
                 responseType: 'arraybuffer'
