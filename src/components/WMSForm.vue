@@ -19,7 +19,10 @@
               <input id="endDate" type="date" v-model="requestParams.endDate" required/>
             </div>
             <div class="wms-form__button">
-                <button type="submit">Request</button>
+                <button type="submit">
+                  <font-awesome-icon v-if="loading" class="wms-form__spinner" icon="fa-solid fa-spinner"/>
+                  <span v-else>Request</span>
+                </button>
             </div>
         </form>
     </div>
@@ -49,12 +52,16 @@
           },
         }
     },
+    inject: {
+      loading: {
+        from: 'loading'
+      }
+    },
     methods: {
       handleSubmit() {
         this.$emit('search', this.requestParams)
       },
     },
-    computed: {},
 }
 </script>
 <style scoped>
@@ -108,5 +115,16 @@
 }
 .wms-form__button button:focus {
   outline: 3px solid var(--color-outline);
+}
+.wms-form__spinner {
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }
 </style>

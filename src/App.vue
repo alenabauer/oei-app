@@ -21,6 +21,7 @@ import HeaderLogo from "@/components/HeaderLogo.vue";
 import SentinelApiService from "@/api/SentinelApiService";
 import { Buffer } from "buffer";
 import { calculateMinMaxCoordinates } from "@/helpers/helpers";
+import { computed } from "vue";
 
 export default {
   components: {
@@ -35,6 +36,12 @@ export default {
       geojson: null,
       imageSource: "",
       showImageModal: false,
+      loading: false,
+    };
+  },
+  provide: function () {
+    return {
+      loading: computed(() => this.loading),
     };
   },
   methods: {
@@ -42,6 +49,7 @@ export default {
       this.geojson = data;
     },
     async generateImage(params) {
+      this.loading = true;
       const bbox = this.geojson ? calculateMinMaxCoordinates(this.geojson) : null;
       try {
         const response = await SentinelApiService.getImage(bbox, params);
@@ -51,6 +59,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
+      this.loading = false;
     },
   },
 };
