@@ -4,10 +4,10 @@
     <FileUpload @data-upload="handleUpload" />
 <!--    display the WMS request params form once a geojson file is uploaded -->
     <WMSForm v-if="geojson" @search="generateImage" />
-    <WMSImage v-if="imageSource" :img-src="imageSource" />
   </header>
 
   <main>
+    <WMSImage v-if="imageSource && showImageModal" :img-src="imageSource" @close="showImageModal = false" />
     <MapContainer :geojson="geojson" />
   </main>
 </template>
@@ -34,6 +34,7 @@ export default {
     return {
       geojson: null,
       imageSource: "",
+      showImageModal: false,
     };
   },
   methods: {
@@ -46,6 +47,7 @@ export default {
         const response = await SentinelApiService.getImage(bbox, params);
         const base64ImageString = Buffer.from(response, "binary").toString("base64");
         this.imageSource = "data:image/png;base64," + base64ImageString;
+        this.showImageModal = true;
       } catch (error) {
         console.error(error);
       }
