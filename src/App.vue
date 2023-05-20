@@ -74,7 +74,7 @@ header {
   header {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     margin: 2rem;
     position: absolute;
     right: 0;

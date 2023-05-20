@@ -2,7 +2,7 @@
     <div class="wms-form__wrapper">
         <p class="wms-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
         <form class="wms-form__form" @submit.prevent="handleSubmit">
-            <select class="wms-form__input" id="layer" name="layer" v-model="requestParams.layer" required>
+            <select id="layer" name="layer" v-model="requestParams.layer" required>
                 <option disabled value="">Select the layer...</option>
                 <option v-for="layer in layerOptions" :key="layer" :value="layer">{{layer}}</option>
             </select>
@@ -10,14 +10,26 @@
               <label for="cloudCoverage">Max. Cloud Coverage:</label>
               <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" required/>
             </div>
-            <div class="wms-form__input">
-              <label for="startDate">Start Date:</label>
-              <input id="startDate" type="date" v-model="requestParams.startDate" required/>
-            </div>
-            <div class="wms-form__input">
-              <label for="endDate">End Date:</label>
-              <input id="endDate" type="date" v-model="requestParams.endDate" required/>
-            </div>
+            <template class="wms-form__two-cols">
+              <div class="wms-form__input">
+                <label for="startDate">Start Date:</label>
+                <input id="startDate" type="date" v-model="requestParams.startDate" required/>
+              </div>
+              <div class="wms-form__input">
+                <label for="endDate">End Date:</label>
+                <input id="endDate" type="date" v-model="requestParams.endDate" required/>
+              </div>
+            </template>
+            <template class="wms-form__two-cols">
+              <div class="wms-form__input">
+                <label for="width">Width (px)</label>
+                <input id="width" type="number" v-model="requestParams.width" required/>
+              </div>
+              <div class="wms-form__input">
+                <label for="height">Height (px)</label>
+                <input id="height" type="number" v-model="requestParams.height" required/>
+              </div>
+            </template>
             <div class="wms-form__button">
                 <button type="submit">
                   <font-awesome-icon v-if="loading" class="wms-form__spinner" icon="fa-solid fa-spinner"/>
@@ -49,6 +61,8 @@
               cloudCoverage: null,
               startDate: '2022-01-01',
               endDate: '2023-05-01',
+              width: 300,
+              height: 300,
           },
         }
     },
@@ -78,22 +92,22 @@
   gap: 0.5rem;
   height: 100%;
 }
-.wms-form__input {
-  width: 100%;
-  min-height: 2.5rem;
-}
-.wms-form__input:focus {
-  outline: 3px solid var(--color-outline);
-}
-.wms-form__input input {
+.wms-form__input input, select {
   width: 100%;
   padding: 0.5rem 1rem;
   border: 1px solid transparent;
   font-size: 1rem;
   margin-top: 0.5rem;
 }
+select:focus {
+  outline: 3px solid var(--color-outline);
+}
 .wms-form__input input:focus {
   outline: 3px solid var(--color-outline);
+}
+.wms-form__two-cols {
+  display: flex;
+  gap: 0.5rem;
 }
 .wms-form__button button {
   padding: 1rem;
