@@ -19,20 +19,21 @@ export default {
   align-items: center;
   justify-content: start;
   gap: 0.5rem;
-  background-color: var(--color-blue-light);
   border: 1px solid var(--color-blue-light);
+  height: fit-content;
 }
 .header_logo__image {
-  padding-left: 0.5rem;
+  padding: 0.5rem;
+  height: 100%;
+  background-color: rgba(var(--color-blue-light-rgb), 0.6);
 }
 .header_logo__text {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--color-blue-dark);
   height: 100%;
-  padding: 0.5rem;
+  background-color: transparent;
 }
 .header_logo__text span {
   font-weight: 600;

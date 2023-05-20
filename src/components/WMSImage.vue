@@ -1,5 +1,5 @@
 <template>
-  <img v-if="imgSrc" :src="imgSrc" alt="Sentinel Hub WMS Image" />
+  <img :src="imgSrc" alt="Sentinel Hub WMS Image" />
 </template>
 <script>
 export default {

@@ -11,19 +11,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import {
-    faChevronDown,
-    faChevronUp,
-    faLocationDot,
-    faGlobe,
-    faPhone,
-    faEnvelope,
+    faUpload
 } from '@fortawesome/free-solid-svg-icons'
 
 import OpenLayersMap from "vue3-openlayers"
 import "vue3-openlayers/dist/vue3-openlayers.css"
 
 /* add icons to the library */
-library.add(faChevronDown, faChevronUp, faLocationDot, faGlobe, faPhone, faEnvelope)
+library.add(faUpload)
 
 const app = createApp(App)
 app.use(OpenLayersMap)

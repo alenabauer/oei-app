@@ -2,8 +2,9 @@
   <header>
     <HeaderLogo />
     <FileUpload @data-upload="handleUpload" />
-    <WMSForm @search="generateImage" />
-    <WMSImage :img-src="imageSource" />
+<!--    display the WMS request params form once a geojson file is uploaded -->
+    <WMSForm v-if="geojson" @search="generateImage" />
+    <WMSImage v-if="imageSource" :img-src="imageSource" />
   </header>
 
   <main>
@@ -62,8 +63,17 @@ header {
   header {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     padding: 2rem;
+    margin: 2rem;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    background-color: rgba(var(--color-blue-dark-rgb), 0.8);
+    min-width: 400px;
+  }
+  main {
+    width: 100vw;
+    height: 100vh;
   }
 }
 </style>
