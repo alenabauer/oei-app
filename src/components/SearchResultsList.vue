@@ -1,11 +1,13 @@
 <template>
-  <ul v-if="searchResults && searchResults.length > 0" class="search_results_list">
-    <SearchResultItem v-for="result in searchResults" :key="result.id" :search-result="result"/>
-  </ul>
-  <p v-if="searchResults && searchResults.length == 0">No results.</p>
+<!--  <ul v-if="searchResults && searchResults.length > 0" className="search_results_list">-->
+<!--    <SearchResultItem v-for="result in searchResults" :key="result.id" :search-result="result"/>-->
+<!--  </ul>-->
+<!--  <p v-if="searchResults && searchResults.length == 0">No results.</p>-->
+  <img :src="searchResults" alt="logo" />
 </template>
 <script>
 import SearchResultItem from "./SearchResultItem.vue";
+
 export default {
   name: "SearchResultsList",
   components: {
@@ -13,8 +15,8 @@ export default {
   },
   props: {
     searchResults: {
-      type: Array,
-      default: () => [],
+      type: String,
+      default: () => '',
     },
   },
 };

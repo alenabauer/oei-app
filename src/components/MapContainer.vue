@@ -15,12 +15,16 @@ import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import GeoJSON from 'ol/format/GeoJSON'
 import {Style, Fill, Stroke} from 'ol/style';
+import { Feature } from 'ol'
+import { Point } from 'ol/geom'
+import { Icon } from 'ol/style'
 
 export default {
   name: 'MapContainer',
   components: {},
   props: {
-    geojson: Object
+    geojson: Object,
+    searchResults: Array
   },
   data: () => ({
     olMap: null,
@@ -40,7 +44,8 @@ export default {
           color: 'white',
           width: 3
         }),
-      })
+        zIndex: 1000,
+      }),
     })
 
     // create the OpenLayers Map instance
@@ -68,6 +73,9 @@ export default {
     geojson(value) {
       // update the vector layer when the geojson data changes
       this.updateSource(value)
+    },
+    searchResults(value) {
+      // this.addMarkers(value)
     }
   },
   methods: {
@@ -83,7 +91,29 @@ export default {
       source.addFeatures(features);
 
       view.fit(source.getExtent())
-    }
+    },
+    addMarkers(results) {
+      results.forEach((result) => {
+        const coordinates = [result.lon, result.lat]
+        this.addMarker(coordinates)
+      })
+    },
+    addMarker(coordinates) {
+      const iconStyle = new Style({
+        image: new Icon({
+          src: '../assets/logo.png',
+          anchor: [0.5, 1], // Position the marker icon's center bottom at the marker's coordinates
+        }),
+      });
+
+      const marker = new Feature({
+        geometry: new Point(coordinates),
+      });
+
+      marker.setStyle(iconStyle);
+
+      this.vectorLayer.getSource().addFeature(marker);
+    },
   }
 }
 </script>

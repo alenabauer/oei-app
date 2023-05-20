@@ -48,18 +48,18 @@ export default {
   methods: {
     hasAddress() {
       return (
-        this.searchResult.tags["addr:street"] &&
-        this.searchResult.tags["addr:housenumber"] &&
-        this.searchResult.tags["addr:postcode"] &&
-        this.searchResult.tags["addr:city"]
+          this.searchResult.tags["addr:street"] &&
+          this.searchResult.tags["addr:housenumber"] &&
+          this.searchResult.tags["addr:postcode"] &&
+          this.searchResult.tags["addr:city"]
       );
     },
     hasInfo() {
       return (
-        this.searchResult.tags["contact:phone"] ||
-        this.searchResult.tags["contact:email"] ||
-        this.searchResult.tags["website"] ||
-        this.hasAddress()
+          this.searchResult.tags["contact:phone"] ||
+          this.searchResult.tags["contact:email"] ||
+          this.searchResult.tags["website"] ||
+          this.hasAddress()
       );
     },
     toggleExpanded() {
@@ -83,21 +83,21 @@ export default {
 };
 </script>
 <style scoped>
-  .search_result_item__preview, .search_result_item__details {
-    background-color: var(--color-blue);
-    padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  .search_result_item__preview:hover {
-    cursor: pointer;
-  }
-  .search_result_item__details {
-    flex-direction: column;
-  }
-  .search_result_item__details span {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
+.search_result_item__preview, .search_result_item__details {
+  background-color: var(--color-blue);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.search_result_item__preview:hover {
+  cursor: pointer;
+}
+.search_result_item__details {
+  flex-direction: column;
+}
+.search_result_item__details span {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
 </style>

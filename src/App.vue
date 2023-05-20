@@ -7,7 +7,7 @@
   </header>
 
   <main>
-    <MapContainer :geojson="geojson" />
+    <MapContainer :geojson="geojson" :search-results="searchResults" />
   </main>
 </template>
 
@@ -16,10 +16,10 @@ import MapContainer from "@/components/MapContainer.vue";
 import FileUpload from "@/components/FileUpload.vue";
 import SearchForm from "@/components/SearchForm.vue";
 import { ref } from "vue";
-import OverpassApiService from "@/api/OverpassApiService";
 import SearchResultsList from "@/components/SearchResultsList.vue";
 import HeaderLogo from "@/components/HeaderLogo.vue";
-
+import SentinelApiService from "@/api/SentinelApiService";
+import {Buffer} from "buffer";
 function calculateMinMaxCoordinates(geojson) {
   let minLon = Infinity;
   let minLat = Infinity;
@@ -50,7 +50,12 @@ function calculateMinMaxCoordinates(geojson) {
   }
 
   // south, west, north, east
-  return `${minLat},${minLon},${maxLat},${maxLon}`;
+  return {
+    minLat,
+    minLon,
+    maxLat,
+    maxLon,
+  }
 }
 
 
@@ -65,16 +70,20 @@ export default {
   setup() {
     const geojson = ref(null);
     const searchResults = ref(null);
+    console.log(SentinelApiService)
 
     const handleUpload = async (data) => {
       geojson.value = data;
     };
 
-    const searchApi = async (query) => {
-      const bbox = geojson.value ? `(${calculateMinMaxCoordinates(geojson.value)})` : "(-90,-180,90,180)";
+    const searchApi = async (params) => {
+      const bbox = geojson.value ? calculateMinMaxCoordinates(geojson.value) : null;
       try {
-        const { elements } = await OverpassApiService.search(query, bbox);
-        searchResults.value = elements;
+        SentinelApiService.getWMS(bbox, params).then((response) => {
+          let base64ImageString = Buffer.from(response, 'binary').toString('base64')
+          let srcValue = "data:image/png;base64,"+base64ImageString
+          searchResults.value = srcValue
+        })
       } catch (error) {
         console.error(error);
       }
