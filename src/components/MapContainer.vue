@@ -63,12 +63,16 @@ export default {
     })
 
     // add the vector layer to the map
-    this.updateSource(this.geojson)
+    if (this.geojson) {
+      this.updateSource(this.geojson)
+    }
   },
   watch: {
     geojson(value) {
       // update the vector layer when the geojson data changes
-      this.updateSource(value)
+      if (value) {
+        this.updateSource(value)
+      }
     },
   },
   methods: {
