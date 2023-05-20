@@ -3,7 +3,7 @@
 <!--    <SearchResultItem v-for="result in searchResults" :key="result.id" :search-result="result"/>-->
 <!--  </ul>-->
 <!--  <p v-if="searchResults && searchResults.length == 0">No results.</p>-->
-  <img :src="searchResults" alt="logo" />
+  <img :src="searchResults" alt="sentinel img" />
 </template>
 <script>
 import SearchResultItem from "./SearchResultItem.vue";
