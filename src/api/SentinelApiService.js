@@ -29,19 +29,7 @@ class SentinelApiService {
         })
     }
 
-    async search(bbox) {
-        const requestUrl = `${this.baseURL}/api/v1/catalog/1.0.0/search?collections=sentinel-2-l2a&bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&datetime=2018-02-12T00:00:00Z/..`;
-        try {
-            const { data } = await this.instance.get(requestUrl);
-            console.log('response.data', data)
-            return data;
-        } catch (error) {
-            console.error(error);
-            throw new Error("An error occurred while searching.");
-        }
-    }
-
-    async getWMS(bbox, params) {
+    async getImage(bbox, params) {
         const { layer, cloudCoverage } = params;
         const requestUrl = `${this.baseURL}/ogc/wms/${this.wmsInstanceId}?REQUEST=GetMap&CRS=EPSG:4326&BBOX=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&LAYERS=${layer}&MAXCC=${cloudCoverage}&WIDTH=320&HEIGHT=320&FORMAT=image/jpeg&TIME=2018-03-29/2022-05-29`;
         try {

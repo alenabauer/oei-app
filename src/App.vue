@@ -2,21 +2,21 @@
   <header>
     <HeaderLogo />
     <FileUpload @data-upload="handleUpload" />
-    <SearchForm @search="searchApi" />
-    <SearchResultsList :searchResults="searchResults" />
+    <WMSForm @search="generateImage" />
+    <WMSImage :img-src="imageSource" />
   </header>
 
   <main>
-    <MapContainer :geojson="geojson" :search-results="searchResults" />
+    <MapContainer :geojson="geojson" />
   </main>
 </template>
 
 <script>
 import MapContainer from "@/components/MapContainer.vue";
 import FileUpload from "@/components/FileUpload.vue";
-import SearchForm from "@/components/SearchForm.vue";
+import WMSForm from "@/components/WMSForm.vue";
+import WMSImage from "@/components/WMSImage.vue";
 import { ref } from "vue";
-import SearchResultsList from "@/components/SearchResultsList.vue";
 import HeaderLogo from "@/components/HeaderLogo.vue";
 import SentinelApiService from "@/api/SentinelApiService";
 import {Buffer} from "buffer";
@@ -61,28 +61,26 @@ function calculateMinMaxCoordinates(geojson) {
 
 export default {
   components: {
-    SearchResultsList,
+    WMSForm,
+    WMSImage,
     MapContainer,
     FileUpload,
-    SearchForm,
     HeaderLogo,
   },
   setup() {
     const geojson = ref(null);
-    const searchResults = ref(null);
-    console.log(SentinelApiService)
+    const imageSource = ref('');
 
     const handleUpload = async (data) => {
       geojson.value = data;
     };
 
-    const searchApi = async (params) => {
+    const generateImage = async (params) => {
       const bbox = geojson.value ? calculateMinMaxCoordinates(geojson.value) : null;
       try {
-        SentinelApiService.getWMS(bbox, params).then((response) => {
-          let base64ImageString = Buffer.from(response, 'binary').toString('base64')
-          let srcValue = "data:image/png;base64,"+base64ImageString
-          searchResults.value = srcValue
+        SentinelApiService.getImage(bbox, params).then((response) => {
+          const base64ImageString = Buffer.from(response, 'binary').toString('base64')
+          imageSource.value = "data:image/png;base64,"+base64ImageString
         })
       } catch (error) {
         console.error(error);
@@ -92,8 +90,8 @@ export default {
     return {
       geojson,
       handleUpload,
-      searchApi,
-      searchResults,
+      generateImage,
+      imageSource,
     };
   },
 };
