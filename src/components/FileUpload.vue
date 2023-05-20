@@ -48,7 +48,7 @@ export default {
 <!-- custom style was added to the file input following this tutorial: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/ -->
 <style scoped>
 .file-upload__wrapper {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   width: 100%;
 }
 #file-upload__input {
@@ -73,7 +73,7 @@ export default {
   cursor: pointer;
 }
 #file-upload__input:focus + label {
-  outline: 2px solid var(--color-blue-light);
+  outline: 3px solid var(--color-outline);
 }
 .file-upload__error {
   color: var(--color-red);

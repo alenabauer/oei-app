@@ -69,7 +69,7 @@ header {
     right: 0;
     z-index: 10;
     background-color: rgba(var(--color-blue-dark-rgb), 0.8);
-    min-width: 400px;
+    width: 400px;
   }
   main {
     width: 100vw;

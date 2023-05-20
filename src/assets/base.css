@@ -29,6 +29,7 @@
   --color-heading: var(--vt-c-text-dark-2);
   --color-link: var(--vt-c-text-dark-2);
   --color-text: var(--vt-c-text-dark-1);
+  --color-outline: var(--vt-c-text-dark-2);
 
   --section-gap: 160px;
 }
@@ -53,8 +54,4 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
 }
