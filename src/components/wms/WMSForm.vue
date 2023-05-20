@@ -73,7 +73,7 @@
     },
     methods: {
       handleSubmit() {
-        this.$emit('search', this.requestParams)
+        this.$emit('submit', this.requestParams)
       },
     },
 }

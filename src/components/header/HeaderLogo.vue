@@ -1,6 +1,6 @@
 <template>
   <div class="header_logo">
-    <img alt="OEI logo" class="header_logo__image" src="../assets/logo.png" width="75" height="75" />
+    <img alt="OEI logo" class="header_logo__image" src="../../assets/logo.png" width="75" height="75" />
     <div class="header_logo__text">
       <span>Orbital</span>
       <span>Edge</span>

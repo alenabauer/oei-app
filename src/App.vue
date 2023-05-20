@@ -1,9 +1,9 @@
 <template>
   <header>
     <HeaderLogo />
-    <FileUpload @data-upload="handleUpload" />
+    <GeoJSONFileUploader @data-upload="handleUpload" />
 <!--    display the WMS request params form once a geojson file is uploaded -->
-    <WMSForm v-if="geojson" @search="generateImage" />
+    <WMSForm v-if="geojson" @submit="generateImage" />
   </header>
 
   <main>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import MapContainer from "@/components/MapContainer.vue";
-import FileUpload from "@/components/FileUpload.vue";
-import WMSForm from "@/components/WMSForm.vue";
-import WMSImage from "@/components/WMSImage.vue";
-import HeaderLogo from "@/components/HeaderLogo.vue";
+import MapContainer from "@/components/map/MapContainer.vue";
+import WMSForm from "@/components/wms/WMSForm.vue";
+import WMSImage from "@/components/wms/WMSImage.vue";
+import GeoJSONFileUploader from "@/components/geojson/GeoJSONFileUploader.vue";
+import HeaderLogo from "@/components/header/HeaderLogo.vue";
 import SentinelApiService from "@/api/SentinelApiService";
 import { Buffer } from "buffer";
 import { calculateMinMaxCoordinates } from "@/helpers/helpers";
@@ -28,7 +28,7 @@ export default {
     WMSForm,
     WMSImage,
     MapContainer,
-    FileUpload,
+    GeoJSONFileUploader,
     HeaderLogo,
   },
   data() {
