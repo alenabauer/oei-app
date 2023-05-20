@@ -27,13 +27,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 60vh;
   width: 100vw;
   z-index: 1000;
   position: absolute;
   top: 0;
   left: 0;
   backdrop-filter: blur(2px) brightness(40%);
+}
+@media (min-width: 1024px) {
+  .modal__backdrop {
+    height: 100vh;
+  }
 }
 .modal__content {
   display: flex;

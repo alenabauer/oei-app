@@ -67,20 +67,24 @@ export default {
 </script>
 <style scoped>
 header {
-  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  margin: 0;
+  right: 0;
+  z-index: 10;
+  background-color: rgba(var(--color-blue-dark-rgb), 0.8);
+  width: 100vw;
 }
-
-@media (min-width: 1024px) {
+main {
+  width: 100vw;
+  height: 60vh;
+}
+@media screen and (min-width: 1024px) {
   header {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 1.5rem;
-    margin: 2rem;
     position: absolute;
-    right: 0;
-    z-index: 10;
-    background-color: rgba(var(--color-blue-dark-rgb), 0.8);
     width: 400px;
+    margin: 2rem;
   }
   main {
     width: 100vw;

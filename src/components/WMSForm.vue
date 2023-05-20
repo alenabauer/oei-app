@@ -94,10 +94,15 @@
 }
 .wms-form__input input, select {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border: 1px solid transparent;
   font-size: 1rem;
   margin-top: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .wms-form__input input, select {
+    padding: 0.5rem 1rem;
+  }
 }
 select:focus {
   outline: 3px solid var(--color-outline);

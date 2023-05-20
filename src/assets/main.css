@@ -2,7 +2,8 @@
 
 #app {
   margin: 0 auto;
-  padding: 2rem;
+  height: 100vh;
+  padding: 0;
   font-weight: normal;
 }
 
@@ -15,12 +16,5 @@ a {
 @media (hover: hover) {
   a:hover {
     color: var(--color-text);
-  }
-}
-
-@media (min-width: 1024px) {
-  #app {
-    height: 100vh;
-    padding: 0;
   }
 }
