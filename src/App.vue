@@ -3,11 +3,12 @@
     <HeaderLogo />
     <GeoJSONFileUploader @data-upload="handleUpload" />
 <!--    display the WMS request params form once a geojson file is uploaded -->
-    <WMSForm v-if="geojson" @submit="generateImage" />
+    <WMSForm v-if="geojson" @submit-request="generateImage" />
   </header>
 
   <main>
     <WMSImage v-if="imageSource && showImageModal" :img-src="imageSource" @close="showImageModal = false" />
+<!--    TODO: think of how to give user an access to the image when the modal is closed -->
     <MapContainer :geojson="geojson" />
   </main>
 </template>

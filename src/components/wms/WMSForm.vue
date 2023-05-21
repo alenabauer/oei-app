@@ -40,10 +40,14 @@
     </div>
 </template>
 <script>
+// TODO: add extra validation for the form, e.g. with Vuelidate
+// TODO: create an Input component
+// TODO: create a Button component
     export default {
     name: 'WMSForm',
     data() {
         return {
+          // TODO: create a separate enum file for layer options
           layerOptions: [
               'AGRICULTURE',
               'BATHYMETRIC',
@@ -73,7 +77,7 @@
     },
     methods: {
       handleSubmit() {
-        this.$emit('submit', this.requestParams)
+        this.$emit('submit-request', this.requestParams)
       },
     },
 }
