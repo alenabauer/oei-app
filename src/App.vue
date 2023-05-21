@@ -19,7 +19,6 @@ import WMSImage from "@/components/wms/WMSImage.vue";
 import GeoJSONFileUploader from "@/components/geojson/GeoJSONFileUploader.vue";
 import HeaderLogo from "@/components/header/HeaderLogo.vue";
 import SentinelApiService from "@/api/SentinelApiService";
-import { Buffer } from "buffer";
 import { calculateMinMaxCoordinates } from "@/helpers/helpers";
 import { computed } from "vue";
 

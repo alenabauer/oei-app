@@ -2,6 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import { Buffer } from 'buffer'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -22,6 +23,8 @@ import "vue3-openlayers/dist/vue3-openlayers.css"
 
 /* add icons to the library */
 library.add(faUpload, faFileArrowDown, faXmark, faSpinner)
+
+globalThis.Buffer = Buffer
 
 const app = createApp(App)
 app.use(OpenLayersMap)
