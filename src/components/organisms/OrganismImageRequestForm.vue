@@ -9,22 +9,29 @@
             <div v-if="v$.requestParams.layer.$error">
                 <span class="organism-image-request-form__error">{{v$.requestParams.layer.$errors[0].$message}}</span>
             </div>
-            <div class="organism-image-request-form__input">
-              <label for="cloudCoverage">Max. Cloud Coverage (%):</label>
-              <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" placeholder="e.g. 15"/>
-            </div>
+            <AtomInput
+                id="cloudCoverage"
+                type="number"
+                v-model="requestParams.cloudCoverage"
+                placeholder="e.g. 15"
+                label="Max. Cloud Coverage (%):"
+            />
             <div v-if="v$.requestParams.cloudCoverage.$error">
               <span class="organism-image-request-form__error">{{v$.requestParams.cloudCoverage.$errors[0].$message}}</span>
             </div>
             <template class="organism-image-request-form__two-cols">
-              <div class="organism-image-request-form__input">
-                <label for="startDate">Start Date:</label>
-                <input id="startDate" type="date" v-model="requestParams.startDate"/>
-              </div>
-              <div class="organism-image-request-form__input">
-                <label for="endDate">End Date:</label>
-                <input id="endDate" type="date" v-model="requestParams.endDate"/>
-              </div>
+              <AtomInput
+                id="startDate"
+                type="date"
+                v-model="requestParams.startDate"
+                label="Start Date:"
+              />
+              <AtomInput
+                id="endDate"
+                type="date"
+                v-model="requestParams.endDate"
+                label="End Date:"
+              />
             </template>
             <div v-if="v$.requestParams.startDate.$error">
               <span class="organism-image-request-form__error">{{v$.requestParams.startDate.$errors[0].$message}}</span>
@@ -33,14 +40,18 @@
               <span class="organism-image-request-form__error">{{v$.requestParams.endDate.$errors[0].$message}}</span>
             </div>
             <template class="organism-image-request-form__two-cols">
-              <div class="organism-image-request-form__input">
-                <label for="width">Width (px)</label>
-                <input id="width" type="number" v-model="requestParams.width"/>
-              </div>
-              <div class="organism-image-request-form__input">
-                <label for="height">Height (px)</label>
-                <input id="height" type="number" v-model="requestParams.height"/>
-              </div>
+              <AtomInput
+                id="width"
+                type="number"
+                v-model="requestParams.width"
+                label="Width (px):"
+              />
+              <AtomInput
+                id="height"
+                type="number"
+                v-model="requestParams.height"
+                label="Height (px):"
+              />
             </template>
             <div v-if="v$.requestParams.width.$error">
               <span class="organism-image-request-form__error">{{v$.requestParams.width.$errors[0].$message}}</span>
@@ -56,19 +67,19 @@
     </div>
 </template>
 <script>
-// TODO: create an Input component
-// TODO: create a Button component
 import { ImageLayerOptions } from "@/enums/ImageLayerOptions";
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, between } from '@vuelidate/validators';
 import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 import AtomButton from "@/components/atoms/AtomButton.vue";
+import AtomInput  from "@/components/atoms/AtomInput.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
     components: {
       AtomSpinner,
       AtomButton,
+      AtomInput,
     },
     setup () {
       return { v$: useVuelidate() }
@@ -138,22 +149,14 @@ export default {
   gap: 0.5rem;
   height: 100%;
 }
-.organism-image-request-form__input input, select {
+select {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid transparent;
   font-size: 1rem;
   margin-top: 0.5rem;
 }
-@media (min-width: 1024px) {
-  .organism-image-request-form__input input, select {
-    padding: 0.5rem 1rem;
-  }
-}
 select:focus {
-  outline: 3px solid var(--color-outline);
-}
-.organism-image-request-form__input input:focus {
   outline: 3px solid var(--color-outline);
 }
 .organism-image-request-form__two-cols {
