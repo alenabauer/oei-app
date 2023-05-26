@@ -2,34 +2,52 @@
     <div class="wms-form__wrapper">
         <p class="wms-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
         <form class="wms-form__form" @submit.prevent="handleSubmit">
-            <select id="layer" name="layer" v-model="requestParams.layer" required>
+            <select id="layer" name="layer" v-model="requestParams.layer">
                 <option disabled value="">Select the layer...</option>
                 <option v-for="layer in layerOptions" :key="layer" :value="layer">{{layer}}</option>
             </select>
+            <div v-if="v$.requestParams.layer.$error">
+                <span class="wms-form__error">{{v$.requestParams.layer.$errors[0].$message}}</span>
+            </div>
             <div class="wms-form__input">
-              <label for="cloudCoverage">Max. Cloud Coverage:</label>
-              <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" required/>
+              <label for="cloudCoverage">Max. Cloud Coverage (%):</label>
+              <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" placeholder="e.g. 15"/>
+            </div>
+            <div v-if="v$.requestParams.cloudCoverage.$error">
+              <span class="wms-form__error">{{v$.requestParams.cloudCoverage.$errors[0].$message}}</span>
             </div>
             <template class="wms-form__two-cols">
               <div class="wms-form__input">
                 <label for="startDate">Start Date:</label>
-                <input id="startDate" type="date" v-model="requestParams.startDate" required/>
+                <input id="startDate" type="date" v-model="requestParams.startDate"/>
               </div>
               <div class="wms-form__input">
                 <label for="endDate">End Date:</label>
-                <input id="endDate" type="date" v-model="requestParams.endDate" required/>
+                <input id="endDate" type="date" v-model="requestParams.endDate"/>
               </div>
             </template>
+            <div v-if="v$.requestParams.startDate.$error">
+              <span class="wms-form__error">{{v$.requestParams.startDate.$errors[0].$message}}</span>
+            </div>
+            <div v-if="v$.requestParams.endDate.$error">
+              <span class="wms-form__error">{{v$.requestParams.endDate.$errors[0].$message}}</span>
+            </div>
             <template class="wms-form__two-cols">
               <div class="wms-form__input">
                 <label for="width">Width (px)</label>
-                <input id="width" type="number" v-model="requestParams.width" required/>
+                <input id="width" type="number" v-model="requestParams.width"/>
               </div>
               <div class="wms-form__input">
                 <label for="height">Height (px)</label>
-                <input id="height" type="number" v-model="requestParams.height" required/>
+                <input id="height" type="number" v-model="requestParams.height"/>
               </div>
             </template>
+            <div v-if="v$.requestParams.width.$error">
+              <span class="wms-form__error">{{v$.requestParams.width.$errors[0].$message}}</span>
+            </div>
+            <div v-if="v$.requestParams.height.$error">
+              <span class="wms-form__error">{{v$.requestParams.height.$errors[0].$message}}</span>
+            </div>
             <div class="wms-form__button">
                 <button type="submit">
                   <font-awesome-icon v-if="loading" class="wms-form__spinner" icon="fa-solid fa-spinner"/>
@@ -40,15 +58,17 @@
     </div>
 </template>
 <script>
-// TODO: add extra validation for the form, e.g. with Vuelidate
 // TODO: create an Input component
 // TODO: create a Button component
 import { ImageLayerOptions } from "@/enums/ImageLayerOptions";
-
-
+import { useVuelidate } from '@vuelidate/core'
+import { required, helpers, between } from '@vuelidate/validators'
 
 export default {
     name: 'WMSForm',
+    setup () {
+      return { v$: useVuelidate() }
+    },
     data() {
         return {
           layerOptions: ImageLayerOptions,
@@ -62,6 +82,31 @@ export default {
           },
         }
     },
+    validations() {
+      return {
+        requestParams: {
+          layer: {
+            required: helpers.withMessage('Please select a layer', required)
+          },
+          cloudCoverage: {
+            required: helpers.withMessage('Please enter a value between 0 and 100', required),
+            between: helpers.withMessage('Please enter a value between 0 and 100', between(0, 100))
+          },
+          startDate: {
+            required: helpers.withMessage('Please enter a start date', required),
+          },
+          endDate: {
+            required: helpers.withMessage('Please enter an end date', required),
+          },
+          width: {
+            required: helpers.withMessage('Please enter a width', required),
+          },
+          height: {
+            required: helpers.withMessage('Please enter a height', required),
+          },
+        },
+      }
+    },
     inject: {
       loading: {
         from: 'loading'
@@ -69,6 +114,7 @@ export default {
     },
     methods: {
       handleSubmit() {
+        this.v$.$validate()
         this.$emit('submit-request', this.requestParams)
       },
     },
@@ -141,5 +187,9 @@ select:focus {
   100% {
     transform: rotate(359deg);
   }
+}
+.wms-form__error {
+  color: yellow;
+  font-size: 0.75rem;
 }
 </style>
