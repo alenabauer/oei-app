@@ -6,7 +6,7 @@ export function calculateMinMaxCoordinates(geojson) {
 
     const processCoordinates = (coordinates) => {
         coordinates.forEach((ring) => {
-            ring.forEach(([lon, lat]) => {
+            ring.forEach(([lat, lon]) => {
                 minLon = Math.min(minLon, lon);
                 minLat = Math.min(minLat, lat);
                 maxLon = Math.max(maxLon, lon);
