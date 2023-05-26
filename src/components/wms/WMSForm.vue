@@ -43,23 +43,15 @@
 // TODO: add extra validation for the form, e.g. with Vuelidate
 // TODO: create an Input component
 // TODO: create a Button component
-    export default {
+import { ImageLayerOptions } from "@/enums/ImageLayerOptions";
+
+
+
+export default {
     name: 'WMSForm',
     data() {
         return {
-          // TODO: create a separate enum file for layer options
-          layerOptions: [
-              'AGRICULTURE',
-              'BATHYMETRIC',
-              'FALSE-COLOR-URBAN',
-              'FALSE-COLOR',
-              'GEOLOGY',
-              'MOISTURE-INDEX',
-              'NATURAL-COLOR',
-              'NDVI',
-              'SWIR',
-              'TRUE-COLOR-S2L2A',
-          ],
+          layerOptions: ImageLayerOptions,
           requestParams: {
               layer: '',
               cloudCoverage: null,
