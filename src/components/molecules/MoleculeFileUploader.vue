@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'MoleculeFileUploader',
   data() {
     return {
       error: null,

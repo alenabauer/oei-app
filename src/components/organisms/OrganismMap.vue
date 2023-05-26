@@ -1,6 +1,5 @@
 <template>
-  <div ref="map-root"
-       style="width: 100%; height: 100%">
+  <div ref="map-root" class="organism-map">
   </div>
 </template>
 
@@ -17,7 +16,7 @@ import GeoJSON from 'ol/format/GeoJSON'
 import {Style, Fill, Stroke} from 'ol/style';
 
 export default {
-  name: 'MapContainer',
+  name: 'OrganismMap',
   components: {},
   props: {
     geojson: Object,
@@ -92,3 +91,14 @@ export default {
   }
 }
 </script>
+<style scoped>
+.organism-map {
+  width: 100vw;
+  height: 60vh;
+}
+@media screen and (min-width: 1024px) {
+  .organism-map {
+    height: 100vh;
+  }
+}
+</style>

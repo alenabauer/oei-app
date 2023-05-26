@@ -1,56 +1,56 @@
 <template>
-    <div class="wms-form__wrapper">
-        <p class="wms-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
-        <form class="wms-form__form" @submit.prevent="handleSubmit">
+    <div class="organism-image-request-form__wrapper">
+        <p class="organism-image-request-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
+        <form class="organism-image-request-form__form" @submit.prevent="handleSubmit">
             <select id="layer" name="layer" v-model="requestParams.layer">
                 <option disabled value="">Select the layer...</option>
                 <option v-for="layer in layerOptions" :key="layer" :value="layer">{{layer}}</option>
             </select>
             <div v-if="v$.requestParams.layer.$error">
-                <span class="wms-form__error">{{v$.requestParams.layer.$errors[0].$message}}</span>
+                <span class="organism-image-request-form__error">{{v$.requestParams.layer.$errors[0].$message}}</span>
             </div>
-            <div class="wms-form__input">
+            <div class="organism-image-request-form__input">
               <label for="cloudCoverage">Max. Cloud Coverage (%):</label>
               <input id="cloudCoverage" type="number" v-model="requestParams.cloudCoverage" placeholder="e.g. 15"/>
             </div>
             <div v-if="v$.requestParams.cloudCoverage.$error">
-              <span class="wms-form__error">{{v$.requestParams.cloudCoverage.$errors[0].$message}}</span>
+              <span class="organism-image-request-form__error">{{v$.requestParams.cloudCoverage.$errors[0].$message}}</span>
             </div>
-            <template class="wms-form__two-cols">
-              <div class="wms-form__input">
+            <template class="organism-image-request-form__two-cols">
+              <div class="organism-image-request-form__input">
                 <label for="startDate">Start Date:</label>
                 <input id="startDate" type="date" v-model="requestParams.startDate"/>
               </div>
-              <div class="wms-form__input">
+              <div class="organism-image-request-form__input">
                 <label for="endDate">End Date:</label>
                 <input id="endDate" type="date" v-model="requestParams.endDate"/>
               </div>
             </template>
             <div v-if="v$.requestParams.startDate.$error">
-              <span class="wms-form__error">{{v$.requestParams.startDate.$errors[0].$message}}</span>
+              <span class="organism-image-request-form__error">{{v$.requestParams.startDate.$errors[0].$message}}</span>
             </div>
             <div v-if="v$.requestParams.endDate.$error">
-              <span class="wms-form__error">{{v$.requestParams.endDate.$errors[0].$message}}</span>
+              <span class="organism-image-request-form__error">{{v$.requestParams.endDate.$errors[0].$message}}</span>
             </div>
-            <template class="wms-form__two-cols">
-              <div class="wms-form__input">
+            <template class="organism-image-request-form__two-cols">
+              <div class="organism-image-request-form__input">
                 <label for="width">Width (px)</label>
                 <input id="width" type="number" v-model="requestParams.width"/>
               </div>
-              <div class="wms-form__input">
+              <div class="organism-image-request-form__input">
                 <label for="height">Height (px)</label>
                 <input id="height" type="number" v-model="requestParams.height"/>
               </div>
             </template>
             <div v-if="v$.requestParams.width.$error">
-              <span class="wms-form__error">{{v$.requestParams.width.$errors[0].$message}}</span>
+              <span class="organism-image-request-form__error">{{v$.requestParams.width.$errors[0].$message}}</span>
             </div>
             <div v-if="v$.requestParams.height.$error">
-              <span class="wms-form__error">{{v$.requestParams.height.$errors[0].$message}}</span>
+              <span class="organism-image-request-form__error">{{v$.requestParams.height.$errors[0].$message}}</span>
             </div>
-            <div class="wms-form__button">
+            <div class="organism-image-request-form__button">
                 <button type="submit">
-                  <font-awesome-icon v-if="loading" class="wms-form__spinner" icon="fa-solid fa-spinner"/>
+                  <font-awesome-icon v-if="loading" class="organism-image-request-form__spinner" icon="fa-solid fa-spinner"/>
                   <span v-else>Request</span>
                 </button>
             </div>
@@ -65,7 +65,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, between } from '@vuelidate/validators'
 
 export default {
-    name: 'WMSForm',
+    name: 'OrganismImageRequestForm',
     setup () {
       return { v$: useVuelidate() }
     },
@@ -121,20 +121,20 @@ export default {
 }
 </script>
 <style scoped>
-.wms-form__wrapper {
+.organism-image-request-form__wrapper {
   width: 100%;
 }
-.wms-form__header {
+.organism-image-request-form__header {
   margin-bottom: 1rem;
 }
-.wms-form__form {
+.organism-image-request-form__form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
   height: 100%;
 }
-.wms-form__input input, select {
+.organism-image-request-form__input input, select {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid transparent;
@@ -142,21 +142,21 @@ export default {
   margin-top: 0.5rem;
 }
 @media (min-width: 1024px) {
-  .wms-form__input input, select {
+  .organism-image-request-form__input input, select {
     padding: 0.5rem 1rem;
   }
 }
 select:focus {
   outline: 3px solid var(--color-outline);
 }
-.wms-form__input input:focus {
+.organism-image-request-form__input input:focus {
   outline: 3px solid var(--color-outline);
 }
-.wms-form__two-cols {
+.organism-image-request-form__two-cols {
   display: flex;
   gap: 0.5rem;
 }
-.wms-form__button button {
+.organism-image-request-form__button button {
   padding: 1rem;
   margin-top: 1rem;
   border: 1px solid var(--color-blue-light);
@@ -170,14 +170,14 @@ select:focus {
   text-transform: uppercase;
   font-weight: 600;
 }
-.wms-form__button button:hover {
+.organism-image-request-form__button button:hover {
   background-color: rgba(var(--color-blue-light-rgb), 0.75);
   border: 1px solid var(--color-blue-light);
 }
-.wms-form__button button:focus {
+.organism-image-request-form__button button:focus {
   outline: 3px solid var(--color-outline);
 }
-.wms-form__spinner {
+.organism-image-request-form__spinner {
   animation: spin 2s linear infinite;
 }
 @keyframes spin {
@@ -188,7 +188,7 @@ select:focus {
     transform: rotate(359deg);
   }
 }
-.wms-form__error {
+.organism-image-request-form__error {
   color: yellow;
   font-size: 0.75rem;
 }

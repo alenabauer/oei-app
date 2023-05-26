@@ -1,7 +1,7 @@
 <template>
-  <div class="header_logo">
-    <img alt="OEI logo" class="header_logo__image" src="../../assets/logo.png" width="75" height="75" />
-    <div class="header_logo__text">
+  <div class="atom_logo">
+    <img alt="OEI logo" class="atom_logo__image" src="../../assets/logo.png" width="75" height="75" />
+    <div class="atom_logo__text">
       <span>Orbital</span>
       <span>Edge</span>
       <span>Imaging</span>
@@ -10,11 +10,11 @@
 </template>
 <script>
 export default {
-  name: 'HeaderLogo',
+  name: 'AtomLogo',
 }
 </script>
 <style scoped>
-.header_logo {
+.atom_logo {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -22,12 +22,12 @@ export default {
   border: 1px solid var(--color-blue-light);
   height: fit-content;
 }
-.header_logo__image {
+.atom_logo__image {
   padding: 0.5rem;
   height: 100%;
   background-color: rgba(var(--color-blue-light-rgb), 0.6);
 }
-.header_logo__text {
+.atom_logo__text {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ export default {
   height: 100%;
   background-color: transparent;
 }
-.header_logo__text span {
+.atom_logo__text span {
   font-weight: 600;
 }
 </style>

@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "WMSImage",
+  name: "OrganismImageModal",
   props: {
     imgSrc: {
       type: String,
