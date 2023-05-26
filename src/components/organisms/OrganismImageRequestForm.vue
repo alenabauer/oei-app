@@ -48,12 +48,10 @@
             <div v-if="v$.requestParams.height.$error">
               <span class="organism-image-request-form__error">{{v$.requestParams.height.$errors[0].$message}}</span>
             </div>
-            <div class="organism-image-request-form__button">
-                <button type="submit">
-                  <AtomSpinner v-if="loading"/>
-                  <span v-else>Request</span>
-                </button>
-            </div>
+            <AtomButton type="submit" btn-class="button-blue">
+              <AtomSpinner v-if="loading"/>
+              <span v-else>Request</span>
+            </AtomButton>
         </form>
     </div>
 </template>
@@ -64,11 +62,13 @@ import { ImageLayerOptions } from "@/enums/ImageLayerOptions";
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers, between } from '@vuelidate/validators';
 import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
+import AtomButton from "@/components/atoms/AtomButton.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
     components: {
-      AtomSpinner
+      AtomSpinner,
+      AtomButton,
     },
     setup () {
       return { v$: useVuelidate() }
@@ -159,27 +159,6 @@ select:focus {
 .organism-image-request-form__two-cols {
   display: flex;
   gap: 0.5rem;
-}
-.organism-image-request-form__button button {
-  padding: 1rem;
-  margin-top: 1rem;
-  border: 1px solid var(--color-blue-light);
-  background-color: rgba(var(--color-blue-light-rgb), 1);
-  color: var(--vt-c-white);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  height: 100%;
-  width: 100%;
-  font-size: 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.organism-image-request-form__button button:hover {
-  background-color: rgba(var(--color-blue-light-rgb), 0.75);
-  border: 1px solid var(--color-blue-light);
-}
-.organism-image-request-form__button button:focus {
-  outline: 3px solid var(--color-outline);
 }
 .organism-image-request-form__error {
   color: yellow;
