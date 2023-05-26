@@ -2,10 +2,13 @@
     <div class="organism-image-request-form__wrapper">
         <p class="organism-image-request-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
         <form class="organism-image-request-form__form" @submit.prevent="handleSubmit">
-            <select id="layer" name="layer" v-model="requestParams.layer">
-                <option disabled value="">Select the layer...</option>
-                <option v-for="layer in layerOptions" :key="layer" :value="layer">{{layer}}</option>
-            </select>
+            <AtomSelect
+                id="layer"
+                name="layer"
+                v-model="requestParams.layer"
+                :options="layerOptions"
+                label="Select the layer..."
+            />
             <AtomError v-if="v$.requestParams.layer.$error" :error-message="v$.requestParams.layer.$errors[0].$message" />
             <AtomInput
                 id="cloudCoverage"
@@ -62,6 +65,7 @@ import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 import AtomButton from "@/components/atoms/AtomButton.vue";
 import AtomInput  from "@/components/atoms/AtomInput.vue";
 import AtomError from "@/components/atoms/AtomError.vue";
+import AtomSelect from "@/components/atoms/AtomSelect.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
@@ -70,6 +74,7 @@ export default {
       AtomButton,
       AtomInput,
       AtomError,
+      AtomSelect,
     },
     setup () {
       return { v$: useVuelidate() }
@@ -138,16 +143,6 @@ export default {
   justify-content: space-between;
   gap: 0.5rem;
   height: 100%;
-}
-select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid transparent;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-}
-select:focus {
-  outline: 3px solid var(--color-outline);
 }
 .organism-image-request-form__two-cols {
   display: flex;
