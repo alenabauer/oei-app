@@ -6,9 +6,7 @@
                 <option disabled value="">Select the layer...</option>
                 <option v-for="layer in layerOptions" :key="layer" :value="layer">{{layer}}</option>
             </select>
-            <div v-if="v$.requestParams.layer.$error">
-                <span class="organism-image-request-form__error">{{v$.requestParams.layer.$errors[0].$message}}</span>
-            </div>
+            <AtomError v-if="v$.requestParams.layer.$error" :error-message="v$.requestParams.layer.$errors[0].$message" />
             <AtomInput
                 id="cloudCoverage"
                 type="number"
@@ -16,9 +14,7 @@
                 placeholder="e.g. 15"
                 label="Max. Cloud Coverage (%):"
             />
-            <div v-if="v$.requestParams.cloudCoverage.$error">
-              <span class="organism-image-request-form__error">{{v$.requestParams.cloudCoverage.$errors[0].$message}}</span>
-            </div>
+            <AtomError v-if="v$.requestParams.cloudCoverage.$error" :error-message="v$.requestParams.cloudCoverage.$errors[0].$message" />
             <template class="organism-image-request-form__two-cols">
               <AtomInput
                 id="startDate"
@@ -33,12 +29,8 @@
                 label="End Date:"
               />
             </template>
-            <div v-if="v$.requestParams.startDate.$error">
-              <span class="organism-image-request-form__error">{{v$.requestParams.startDate.$errors[0].$message}}</span>
-            </div>
-            <div v-if="v$.requestParams.endDate.$error">
-              <span class="organism-image-request-form__error">{{v$.requestParams.endDate.$errors[0].$message}}</span>
-            </div>
+            <AtomError v-if="v$.requestParams.startDate.$error" :error-message="v$.requestParams.startDate.$errors[0].$message" />
+            <AtomError v-if="v$.requestParams.endDate.$error" :error-message="v$.requestParams.endDate.$errors[0].$message" />
             <template class="organism-image-request-form__two-cols">
               <AtomInput
                 id="width"
@@ -53,12 +45,8 @@
                 label="Height (px):"
               />
             </template>
-            <div v-if="v$.requestParams.width.$error">
-              <span class="organism-image-request-form__error">{{v$.requestParams.width.$errors[0].$message}}</span>
-            </div>
-            <div v-if="v$.requestParams.height.$error">
-              <span class="organism-image-request-form__error">{{v$.requestParams.height.$errors[0].$message}}</span>
-            </div>
+            <AtomError v-if="v$.requestParams.width.$error" :error-message="v$.requestParams.width.$errors[0].$message" />
+            <AtomError v-if="v$.requestParams.height.$error" :error-message="v$.requestParams.height.$errors[0].$message" />
             <AtomButton type="submit" btn-class="button-blue">
               <AtomSpinner v-if="loading"/>
               <span v-else>Request</span>
@@ -73,6 +61,7 @@ import { required, helpers, between } from '@vuelidate/validators';
 import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 import AtomButton from "@/components/atoms/AtomButton.vue";
 import AtomInput  from "@/components/atoms/AtomInput.vue";
+import AtomError from "@/components/atoms/AtomError.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
@@ -80,6 +69,7 @@ export default {
       AtomSpinner,
       AtomButton,
       AtomInput,
+      AtomError,
     },
     setup () {
       return { v$: useVuelidate() }
@@ -162,9 +152,5 @@ select:focus {
 .organism-image-request-form__two-cols {
   display: flex;
   gap: 0.5rem;
-}
-.organism-image-request-form__error {
-  color: yellow;
-  font-size: 0.75rem;
 }
 </style>
