@@ -50,7 +50,7 @@
             </div>
             <div class="organism-image-request-form__button">
                 <button type="submit">
-                  <font-awesome-icon v-if="loading" class="organism-image-request-form__spinner" icon="fa-solid fa-spinner"/>
+                  <AtomSpinner v-if="loading"/>
                   <span v-else>Request</span>
                 </button>
             </div>
@@ -61,11 +61,15 @@
 // TODO: create an Input component
 // TODO: create a Button component
 import { ImageLayerOptions } from "@/enums/ImageLayerOptions";
-import { useVuelidate } from '@vuelidate/core'
-import { required, helpers, between } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core';
+import { required, helpers, between } from '@vuelidate/validators';
+import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
+    components: {
+      AtomSpinner
+    },
     setup () {
       return { v$: useVuelidate() }
     },
@@ -176,17 +180,6 @@ select:focus {
 }
 .organism-image-request-form__button button:focus {
   outline: 3px solid var(--color-outline);
-}
-.organism-image-request-form__spinner {
-  animation: spin 2s linear infinite;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(359deg);
-  }
 }
 .organism-image-request-form__error {
   color: yellow;
