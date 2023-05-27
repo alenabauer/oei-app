@@ -37,19 +37,19 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid transparent;
   font-size: 1rem;
   margin-top: 0.5rem;
-}
-input:focus {
-  outline: 3px solid var(--color-outline);
-}
-@media (min-width: 1024px) {
-  input {
+
+  &:focus {
+    outline: 3px solid var(--color-outline);
+  }
+
+  @media (min-width: 1024px) {
     padding: 0.5rem 1rem;
   }
 }

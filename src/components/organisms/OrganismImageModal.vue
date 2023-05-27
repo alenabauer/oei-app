@@ -1,5 +1,5 @@
 <template>
-  <div class="modal__backdrop">
+  <div class="modal">
     <div class="modal__content">
       <div class="modal__content__options">
         <a :href="imgSrc" download="sentinel-wms-img">
@@ -22,8 +22,8 @@ export default {
   }
 };
 </script>
-<style scoped>
-.modal__backdrop {
+<style lang="scss" scoped>
+.modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,34 +34,37 @@ export default {
   top: 0;
   left: 0;
   backdrop-filter: blur(2px) brightness(40%);
-}
-@media (min-width: 1024px) {
-  .modal__backdrop {
+
+  @media (min-width: 1024px) {
     height: 100vh;
   }
-}
-.modal__content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: rgba(var(--color-blue-light-rgb), 0.4);
-  padding: 1rem 2rem 2rem;
-}
-.modal__content__options {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  width: 100%;
-  font-size: 2rem;
-  gap: 2rem;
-}
-.modal__close {
-  color: var(--color-link);
-  transition: .3s;
-}
-.modal__close:hover {
-  color: white;
-  cursor: pointer;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(var(--color-blue-light-rgb), 0.4);
+    padding: 1rem 2rem 2rem;
+
+    &__options {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      width: 100%;
+      font-size: 2rem;
+      gap: 2rem;
+    }
+  }
+
+  &__close {
+    color: var(--color-link);
+    transition: .3s;
+
+    &:hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
 }
 </style>

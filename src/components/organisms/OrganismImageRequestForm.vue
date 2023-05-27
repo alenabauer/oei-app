@@ -1,5 +1,5 @@
 <template>
-    <div class="organism-image-request-form__wrapper">
+    <div class="organism-image-request-form">
         <p class="organism-image-request-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
         <form class="organism-image-request-form__form" @submit.prevent="handleSubmit">
             <AtomSelect
@@ -130,22 +130,25 @@ export default {
     },
 }
 </script>
-<style scoped>
-.organism-image-request-form__wrapper {
+<style lang="scss" scoped>
+.organism-image-request-form {
   width: 100%;
-}
-.organism-image-request-form__header {
-  margin-bottom: 1rem;
-}
-.organism-image-request-form__form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.5rem;
-  height: 100%;
-}
-.organism-image-request-form__two-cols {
-  display: flex;
-  gap: 0.5rem;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    height: 100%;
+  }
+
+  &__two-cols {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 </style>

@@ -91,13 +91,12 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .organism-map {
   width: 100vw;
   height: 60vh;
-}
-@media screen and (min-width: 1024px) {
-  .organism-map {
+
+  @media screen and (min-width: 1024px) {
     height: 100vh;
   }
 }

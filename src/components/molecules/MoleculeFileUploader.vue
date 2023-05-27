@@ -1,7 +1,7 @@
 <template>
-  <div class="file-upload__wrapper">
+  <div class="file-upload">
     <!--  TODO: improve validation of the file extension -->
-    <input id="file-upload__input" accept=".geojson" type="file" @change="handleFileUpload"/>
+    <input class="file-upload__input" id="file-upload__input" accept=".geojson" type="file" @change="handleFileUpload"/>
     <label for="file-upload__input">
       <font-awesome-icon icon="fa-solid fa-upload" />
       {{ fileName || 'Upload a GeoJSON file...' }}
@@ -47,36 +47,41 @@ export default {
 </script>
 
 <!-- custom style was added to the file input following this tutorial: https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/ -->
-<style scoped>
-.file-upload__wrapper {
+<style lang="scss" scoped>
+.file-upload {
   padding: 1.5rem 0;
   width: 100%;
-}
-#file-upload__input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-#file-upload__input + label {
-  background-color: rgba(var(--color-red-rgb), 1);
-  display: inline-block;
-  padding: 1rem;
-  width: 100%;
-  text-align: center;
-  transition: all .3s;
-}
-#file-upload__input:focus + label,
-#file-upload__input + label:hover {
-  background-color: rgba(var(--color-red-rgb), 0.75);
-  cursor: pointer;
-}
-#file-upload__input:focus + label {
-  outline: 3px solid var(--color-outline);
-}
-.file-upload__error {
-  color: var(--color-red);
+
+  &__input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+    & + label {
+      background-color: rgba(var(--color-red-rgb), 1);
+      display: inline-block;
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+      transition: all .3s;
+    }
+
+    &:focus + label,
+    & + label:hover {
+      background-color: rgba(var(--color-red-rgb), 0.75);
+      cursor: pointer;
+    }
+
+    &:focus + label {
+      outline: 3px solid var(--color-outline);
+    }
+  }
+
+  &__error {
+    color: var(--color-red);
+  }
 }
 </style>

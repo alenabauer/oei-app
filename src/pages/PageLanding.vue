@@ -65,7 +65,7 @@ export default {
 };
 
 </script>
-<style scoped>
+<style lang="scss" scoped>
 #section-controls {
   display: flex;
   flex-direction: column;
@@ -75,9 +75,8 @@ export default {
   z-index: 10;
   background-color: rgba(var(--color-blue-dark-rgb), 0.8);
   width: 100vw;
-}
-@media screen and (min-width: 1024px) {
-  #section-controls {
+
+  @media screen and (min-width: 1024px) {
     position: absolute;
     width: 400px;
     margin: 2rem;

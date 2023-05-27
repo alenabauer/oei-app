@@ -13,7 +13,7 @@ export default {
   name: 'AtomLogo',
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .atom_logo {
   display: flex;
   align-items: center;
@@ -21,21 +21,24 @@ export default {
   gap: 0.5rem;
   border: 1px solid var(--color-blue-light);
   height: fit-content;
-}
-.atom_logo__image {
-  padding: 0.5rem;
-  height: 100%;
-  background-color: rgba(var(--color-blue-light-rgb), 0.6);
-}
-.atom_logo__text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  background-color: transparent;
-}
-.atom_logo__text span {
-  font-weight: 600;
+
+  &__image {
+    padding: 0.5rem;
+    height: 100%;
+    background-color: rgba(var(--color-blue-light-rgb), 0.6);
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    background-color: transparent;
+
+    span {
+      font-weight: 600;
+    }
+  }
 }
 </style>

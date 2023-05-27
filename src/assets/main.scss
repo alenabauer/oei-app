@@ -1,4 +1,4 @@
-@import './base.css';
+@import './base.scss';
 
 #app {
   margin: 0 auto;
@@ -11,10 +11,8 @@ a {
   text-decoration: underline;
   color: var(--color-link);
   transition: 0.4s;
-}
 
-@media (hover: hover) {
-  a:hover {
+  &:hover {
     color: var(--color-text);
   }
 }
