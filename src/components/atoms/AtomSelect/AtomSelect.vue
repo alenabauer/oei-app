@@ -5,7 +5,8 @@
       :value="modelValue"
       @change="$emit('update:modelValue', $event.target?.value)"
   >
-    <option disabled value="">{{ label }}</option>
+    <option v-if="label" disabled value="">{{ label }}</option>
+    <option v-else disabled value="">Select...</option>
     <option v-for="option in options" :key="option" :value="option">{{option}}</option>
   </select>
 </template>
@@ -22,10 +23,6 @@ export default {
       default: '',
     },
     label: {
-      type: String,
-      default: '',
-    },
-    placeholder: {
       type: String,
       default: '',
     },

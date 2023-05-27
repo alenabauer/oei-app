@@ -65,7 +65,7 @@ import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 import AtomButton from "@/components/atoms/AtomButton/AtomButton.vue";
 import AtomInput  from "@/components/atoms/AtomInput/AtomInput.vue";
 import AtomError from "@/components/atoms/AtomError/AtomError.vue";
-import AtomSelect from "@/components/atoms/AtomSelect.vue";
+import AtomSelect from "@/components/atoms/AtomSelect/AtomSelect.vue";
 
 export default {
     name: 'OrganismImageRequestForm',
