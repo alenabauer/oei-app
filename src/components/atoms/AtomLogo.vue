@@ -18,26 +18,25 @@ export default {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 0.5rem;
-  border: 1px solid var(--color-blue-light);
   height: fit-content;
 
   &__image {
     padding: 0.5rem;
     height: 100%;
-    background-color: rgba(var(--color-blue-light-rgb), 0.6);
   }
 
   &__text {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
     background-color: transparent;
 
     span {
       font-weight: 600;
+      line-height: 1.1rem;
+      color: var(--color-red);
     }
   }
 }

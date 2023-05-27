@@ -141,7 +141,6 @@ export default {
   &__form {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 0.5rem;
     height: 100%;
   }

@@ -14,7 +14,7 @@ export default {
 </script>
 <style scoped>
 .error {
-  color: yellow;
+  color: var(--color-red);
   font-size: 0.75rem;
 }
 </style>

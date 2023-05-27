@@ -25,7 +25,6 @@ button {
   color: var(--vt-c-white);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  height: 100%;
   width: 100%;
   font-size: 1rem;
   text-transform: uppercase;

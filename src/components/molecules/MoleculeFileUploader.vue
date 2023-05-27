@@ -35,7 +35,6 @@ export default {
             this.$emit('data-upload', data)
           }
           this.error = null
-        //   TODO: test different geojson files
         } catch (e) {
           this.error = 'Error: Invalid format'
         }
@@ -67,11 +66,11 @@ export default {
       width: 100%;
       text-align: center;
       transition: all .3s;
+      color: var(--vt-c-white);
     }
 
-    &:focus + label,
     & + label:hover {
-      background-color: rgba(var(--color-red-rgb), 0.75);
+      background-color: rgba(var(--color-red-rgb), 0.85);
       cursor: pointer;
     }
 

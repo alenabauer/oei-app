@@ -1,5 +1,5 @@
 <template>
-  <section id="section-controls">
+  <section id="sidebar">
     <AtomLogo />
     <MoleculeFileUploader @data-upload="handleUpload" />
     <!--    display the WMS request params form once a geojson file is uploaded -->
@@ -66,20 +66,22 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-#section-controls {
+#sidebar {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   padding: 2rem 1.5rem;
-  margin: 0;
   right: 0;
   z-index: 10;
-  background-color: rgba(var(--color-blue-dark-rgb), 0.8);
+  background: rgba(var(--vt-c-white-rgb), 0.4);
+  backdrop-filter: blur(4px);
   width: 100vw;
 
   @media screen and (min-width: 1024px) {
     position: absolute;
     width: 400px;
-    margin: 2rem;
+    height: 100vh;
+    overflow-y: scroll;
   }
 }
 </style>
