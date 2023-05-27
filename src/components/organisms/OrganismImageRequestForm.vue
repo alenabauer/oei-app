@@ -64,7 +64,7 @@ import { required, helpers, between } from '@vuelidate/validators';
 import AtomSpinner from "@/components/atoms/AtomSpinner.vue";
 import AtomButton from "@/components/atoms/AtomButton/AtomButton.vue";
 import AtomInput  from "@/components/atoms/AtomInput.vue";
-import AtomError from "@/components/atoms/AtomError.vue";
+import AtomError from "@/components/atoms/AtomError/AtomError.vue";
 import AtomSelect from "@/components/atoms/AtomSelect.vue";
 
 export default {
