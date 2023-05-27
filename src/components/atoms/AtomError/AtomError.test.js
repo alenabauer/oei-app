@@ -1,4 +1,3 @@
-import { it } from 'vitest'
 import AtomError from './AtomError.vue'
 import { mount } from '@vue/test-utils'
 

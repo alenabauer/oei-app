@@ -1,4 +1,3 @@
-import { it } from 'vitest'
 import AtomButton from './AtomButton.vue'
 import { mount } from '@vue/test-utils'
 
