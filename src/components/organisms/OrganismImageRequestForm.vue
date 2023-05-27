@@ -1,6 +1,9 @@
 <template>
     <div class="organism-image-request-form">
-        <p class="organism-image-request-form__header">Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
+        <div class="organism-image-request-form__header">
+          <p>Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
+          <p>Bounding box: {{ Object.values(bbox).join(', ') }}</p>
+        </div>
         <form class="organism-image-request-form__form" @submit.prevent="handleSubmit">
             <AtomSelect
                 id="layer"
@@ -120,6 +123,9 @@ export default {
     inject: {
       loading: {
         from: 'loading'
+      },
+      bbox: {
+        from: 'bbox'
       }
     },
     methods: {

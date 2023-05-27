@@ -3,7 +3,10 @@
     <AtomLogo />
     <MoleculeFileUploader @data-upload="handleUpload" />
     <!--    display the WMS request params form once a geojson file is uploaded -->
-    <OrganismImageRequestForm v-if="geojson" @submit-request="generateImage" />
+    <OrganismImageRequestForm
+        v-if="geojson"
+        @submit-request="generateImage"
+    />
   </section>
 
   <!--    TODO: think of how to give user an access to the image when the modal is closed -->
@@ -39,20 +42,26 @@ export default {
       loading: false,
     };
   },
+  computed: {
+    bbox() {
+      return this.geojson ? calculateMinMaxCoordinates(this.geojson) : null;
+    },
+  },
   provide: function () {
     return {
       loading: computed(() => this.loading),
+      bbox: computed(() => this.bbox),
     };
   },
   methods: {
     handleUpload(data) {
       this.geojson = data;
+      console.log('bbox', this.bbox)
     },
     async generateImage(params) {
       this.loading = true;
-      const bbox = this.geojson ? calculateMinMaxCoordinates(this.geojson) : null;
       try {
-        const response = await SentinelApiService.getImage(bbox, params);
+        const response = await SentinelApiService.getImage(this.bbox, params);
         const base64ImageString = Buffer.from(response, "binary").toString("base64");
         this.imageSource = "data:image/png;base64," + base64ImageString;
         this.showImageModal = true;
