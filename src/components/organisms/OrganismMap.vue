@@ -65,12 +65,22 @@ export default {
     if (this.geojson) {
       this.updateSource(this.geojson)
     }
+
+    this.olMap.getView().on('change:resolution', this.handleViewChange);
+    this.olMap.getView().on('change:center', this.handleViewChange);
+  },
+  inject: {
+    updateBbox: {
+      from: 'updateBbox'
+    }
   },
   watch: {
     geojson(value) {
       // update the vector layer when the geojson data changes
       if (value) {
         this.updateSource(value)
+        const bbox = this.calculateBboxFromViewExtent()
+        this.updateBbox(bbox)
       }
     },
   },
@@ -88,6 +98,20 @@ export default {
 
       view.fit(source.getExtent())
     },
+    handleViewChange() {
+      const bbox = this.calculateBboxFromView()
+      this.updateBbox(bbox)
+    },
+    calculateBboxFromView() {
+      // get extent of the current view
+      const extent = this.olMap.getView().calculateExtent(this.olMap.getSize());
+      return {
+        minLon: extent[0],
+        minLat: extent[1],
+        maxLon: extent[2],
+        maxLat: extent[3],
+      }
+    }
   }
 }
 </script>

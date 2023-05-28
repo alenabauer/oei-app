@@ -2,7 +2,7 @@
     <div class="organism-image-request-form">
         <div class="organism-image-request-form__header">
           <p>Send a request to Sentinel Hub WMS service to get imagery for the selected area</p>
-          <p>Bounding box: {{ Object.values(bbox).join(', ') }}</p>
+          <p v-if="bbox && Object.values(bbox)">Bounding box: {{ Object.values(bbox).join(', ') }}</p>
         </div>
         <form class="organism-image-request-form__form" @submit.prevent="handleSubmit">
             <AtomSelect
@@ -125,7 +125,8 @@ export default {
         from: 'loading'
       },
       bbox: {
-        from: 'bbox'
+        from: 'bbox',
+        default: null,
       }
     },
     methods: {

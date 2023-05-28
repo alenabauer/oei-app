@@ -40,23 +40,21 @@ export default {
       imageSource: "",
       showImageModal: false,
       loading: false,
+      bbox: null,
     };
-  },
-  computed: {
-    bbox() {
-      return this.geojson ? calculateMinMaxCoordinates(this.geojson) : null;
-    },
   },
   provide: function () {
     return {
       loading: computed(() => this.loading),
       bbox: computed(() => this.bbox),
+      updateBbox: (bbox) => {
+        this.bbox = bbox;
+      },
     };
   },
   methods: {
     handleUpload(data) {
       this.geojson = data;
-      console.log('bbox', this.bbox)
     },
     async generateImage(params) {
       this.loading = true;
