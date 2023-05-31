@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should render correctly 1`] = `
+"<div data-v-d9e83458=\\"\\" class=\\"atom_logo\\"><img data-v-d9e83458=\\"\\" alt=\\"OEI logo\\" class=\\"atom_logo__image\\" src=\\"/src/assets/logo.png\\" width=\\"75\\" height=\\"75\\">
+  <div data-v-d9e83458=\\"\\" class=\\"atom_logo__text\\"><span data-v-d9e83458=\\"\\">Orbital</span><span data-v-d9e83458=\\"\\">Edge</span><span data-v-d9e83458=\\"\\">Imaging</span></div>
+</div>"
+`;

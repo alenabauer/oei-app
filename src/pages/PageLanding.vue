@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import AtomLogo from "@/components/atoms/AtomLogo.vue";
+import AtomLogo from "@/components/atoms/AtomLogo/AtomLogo.vue";
 import MoleculeFileUploader from "@/components/molecules/MoleculeFileUploader.vue";
 import OrganismMap from "@/components/organisms/OrganismMap.vue";
 import OrganismImageRequestForm from "@/components/organisms/OrganismImageRequestForm.vue";
