@@ -4,11 +4,13 @@ import { mount } from "@vue/test-utils";
 it("should render an input", () => {
     const wrapper = mount(AtomInput);
     expect(wrapper.html()).toContain("input");
+    wrapper.unmount();
 })
 
 it("should render an input of type text if no prop type is passed", () => {
     const wrapper = mount(AtomInput);
     expect(wrapper.html()).toContain("type=\"text\"");
+    wrapper.unmount();
 })
 
 it("should render an input of type password if prop type is password", () => {
@@ -18,4 +20,5 @@ it("should render an input of type password if prop type is password", () => {
         }
     });
     expect(wrapper.html()).toContain("type=\"password\"");
+    wrapper.unmount();
 })

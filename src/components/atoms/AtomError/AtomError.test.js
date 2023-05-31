@@ -8,6 +8,7 @@ it('should render the error message', () => {
         }
     })
     expect(wrapper.html()).toContain('This is an error message')
+    wrapper.unmount();
 })
 
 it('should accept the errorMessage prop', () => {
@@ -17,6 +18,7 @@ it('should accept the errorMessage prop', () => {
         }
     })
     expect(wrapper.props().errorMessage).toBe('This is an error message')
+    wrapper.unmount();
 })
 
 it('should accept only string as errorMessage', () => {
@@ -26,4 +28,5 @@ it('should accept only string as errorMessage', () => {
         }
     })
     expect(wrapper).toThrow(TypeError)
+    wrapper.unmount();
 })

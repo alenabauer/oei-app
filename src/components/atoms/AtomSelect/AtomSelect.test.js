@@ -4,6 +4,7 @@ import { mount } from "@vue/test-utils";
 it("should render a select", () => {
     const wrapper = mount(AtomSelect);
     expect(wrapper.html()).toContain("select");
+    wrapper.unmount();
 })
 
 it("should render a select with the passed options", () => {
@@ -15,6 +16,7 @@ it("should render a select with the passed options", () => {
     expect(wrapper.html()).toContain("option1");
     expect(wrapper.html()).toContain("option2");
     expect(wrapper.html()).toContain("option3");
+    wrapper.unmount();
 })
 
 it("should render a select with \'Select...\' as the first option if label prop is not provided", () => {
@@ -24,6 +26,7 @@ it("should render a select with \'Select...\' as the first option if label prop 
         }
     });
     expect(wrapper.html()).toContain("Select...");
+    wrapper.unmount();
 })
 
 it("should render a select with the passed label as the first option if label prop is provided", () => {
@@ -34,4 +37,5 @@ it("should render a select with the passed label as the first option if label pr
         }
     });
     expect(wrapper.html()).toContain("Select an option");
+    wrapper.unmount();
 })
