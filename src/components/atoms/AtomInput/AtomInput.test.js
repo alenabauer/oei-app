@@ -1,24 +1,34 @@
 import AtomInput from "./AtomInput.vue";
 import { mount } from "@vue/test-utils";
 
-it("should render an input", () => {
-    const wrapper = mount(AtomInput);
-    expect(wrapper.html()).toContain("input");
-    wrapper.unmount();
-})
+describe("AtomInput", () => {
+    let wrapper;
 
-it("should render an input of type text if no prop type is passed", () => {
-    const wrapper = mount(AtomInput);
-    expect(wrapper.html()).toContain("type=\"text\"");
-    wrapper.unmount();
-})
-
-it("should render an input of type password if prop type is password", () => {
-    const wrapper = mount(AtomInput, {
-        props: {
-            type: "password"
-        }
+    beforeAll(() => {
+        wrapper = mount(AtomInput);
     });
-    expect(wrapper.html()).toContain("type=\"password\"");
-    wrapper.unmount();
-})
+
+    afterAll(() => {
+        wrapper.unmount();
+    });
+
+    it("should render an input", () => {
+        expect(wrapper.html()).toContain("input");
+    });
+
+    it("should render an input of type text if no prop type is passed", async () => {
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.html()).toContain("type=\"text\"");
+    });
+
+    it("should render an input of type password if prop type is password", async () => {
+        wrapper.setProps({
+            type: "password"
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.html()).toContain("type=\"password\"");
+    });
+});

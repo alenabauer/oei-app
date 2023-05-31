@@ -1,32 +1,36 @@
-import AtomError from './AtomError.vue'
-import { mount } from '@vue/test-utils'
+import AtomError from './AtomError.vue';
+import { mount } from '@vue/test-utils';
 
-it('should render the error message', () => {
-    const wrapper = mount(AtomError, {
-        props: {
-            errorMessage: 'This is an error message'
-        }
-    })
-    expect(wrapper.html()).toContain('This is an error message')
-    wrapper.unmount();
-})
+describe('AtomError', () => {
+    let wrapper;
 
-it('should accept the errorMessage prop', () => {
-    const wrapper = mount(AtomError, {
-        props: {
-        errorMessage: 'This is an error message'
-        }
-    })
-    expect(wrapper.props().errorMessage).toBe('This is an error message')
-    wrapper.unmount();
-})
+    beforeAll(() => {
+        wrapper = mount(AtomError, {
+            props: {
+                errorMessage: 'This is an error message'
+            }
+        });
+    });
 
-it('should accept only string as errorMessage', () => {
-    const wrapper = mount(AtomError, {
-        props: {
-        errorMessage: 123
-        }
-    })
-    expect(wrapper).toThrow(TypeError)
-    wrapper.unmount();
-})
+    afterAll(() => {
+        wrapper.unmount();
+    });
+
+    it('should render the error message', () => {
+        expect(wrapper.html()).toContain('This is an error message');
+    });
+
+    it('should accept the errorMessage prop', () => {
+        expect(wrapper.props().errorMessage).toBe('This is an error message');
+    });
+
+    it('should accept only string as errorMessage', async () => {
+        wrapper.setProps({
+            errorMessage: 123
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper).toThrow(TypeError);
+    });
+});

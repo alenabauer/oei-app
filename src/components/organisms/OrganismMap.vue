@@ -79,7 +79,7 @@ export default {
       // update the vector layer when the geojson data changes
       if (value) {
         this.updateSource(value)
-        const bbox = this.calculateBboxFromViewExtent()
+        const bbox = this.calculateBboxFromView()
         this.updateBbox(bbox)
       }
     },

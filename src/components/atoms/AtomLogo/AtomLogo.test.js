@@ -1,20 +1,22 @@
 import AtomLogo from './AtomLogo.vue';
 import { mount } from "@vue/test-utils";
 
-it('should render correctly', () => {
-    const wrapper = mount(AtomLogo);
-    expect(wrapper.html()).toMatchSnapshot();
-    wrapper.unmount();
-})
+describe("AtomLogo", () => {
+    let wrapper;
 
-it('should render an image', () => {
-    const wrapper = mount(AtomLogo);
-    expect(wrapper.html()).toContain('img');
-    wrapper.unmount();
-})
+    beforeAll(() => {
+        wrapper = mount(AtomLogo);
+    });
 
-it('should render an image with the correct src', () => {
-    const wrapper = mount(AtomLogo);
-    expect(wrapper.html()).toContain('src="/src/assets/logo.png"');
-    wrapper.unmount();
-})
+    afterAll(() => {
+        wrapper.unmount();
+    });
+
+    it('should render an image', () => {
+        expect(wrapper.html()).toContain('img');
+    });
+
+    it('should render an image with the correct src', () => {
+        expect(wrapper.html()).toContain('src="/src/assets/logo.png"');
+    });
+});

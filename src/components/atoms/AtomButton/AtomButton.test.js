@@ -1,34 +1,42 @@
-import AtomButton from './AtomButton.vue'
-import { mount } from '@vue/test-utils'
+import AtomButton from './AtomButton.vue';
+import { mount } from '@vue/test-utils';
 
-it('should render a button', () => {
-    const wrapper = mount(AtomButton)
-    expect(wrapper.html()).toContain('button')
-    wrapper.unmount();
-})
+describe('AtomButton', () => {
+    let wrapper;
 
-it('should render a button of type submit if prop type is submit', () => {
-    const wrapper = mount(AtomButton, {
-        props: {
-        type: 'submit'
-        }
-    })
-    expect(wrapper.html()).toContain('type="submit"')
-    wrapper.unmount();
-})
+    beforeAll(() => {
+        wrapper = mount(AtomButton);
+    });
 
-it('should render a button of type button if no prop type is passed', () => {
-    const wrapper = mount(AtomButton)
-    expect(wrapper.html()).toContain('type="button"')
-    wrapper.unmount();
-})
+    afterAll(() => {
+        wrapper.unmount();
+    });
 
-it('should apply the passed class', () => {
-    const wrapper = mount(AtomButton, {
-        props: {
-        class: 'button-blue'
-        }
-    })
-    expect(wrapper.html()).toContain('button-blue')
-    wrapper.unmount();
-})
+    it('should render a button', () => {
+        expect(wrapper.html()).toContain('button');
+    });
+
+    it('should render a button of type button if no prop type is passed', () => {
+        expect(wrapper.html()).toContain('type="button"');
+    });
+
+    it('should render a button of type submit if prop type is submit', async () => {
+        wrapper.setProps({
+            type: 'submit'
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.html()).toContain('type="submit"');
+    });
+
+    it('should apply the passed class', async () => {
+        wrapper.setProps({
+            class: 'button-blue'
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.html()).toContain('button-blue');
+    });
+});
