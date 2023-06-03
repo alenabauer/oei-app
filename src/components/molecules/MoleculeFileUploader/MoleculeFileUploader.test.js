@@ -24,7 +24,7 @@ describe("MoleculeFileUploader", () => {
         expect(wrapper.html()).toContain("accept=\".geojson\"");
     })
 
-    it("should render a span with the error message if the error value is not null", async () => {
+    it("should render an error message if the error value is not null", async () => {
         wrapper.setData({
             error: "This is an error"
         });

@@ -30,16 +30,14 @@ export default {
       source: new VectorSource({
         features: [], // empty vector layer
       }),
-      // TODO: figure out why style is not applied
       style: new Style({
         fill: new Fill({
-          color: 'red'
+          color: 'rgba(46, 134, 171, 0.2)'
         }),
         stroke: new Stroke({
-          color: 'white',
-          width: 3
+          color: 'rgb(46, 134, 171)',
+          width: 2
         }),
-        zIndex: 1000,
       }),
     })
 
@@ -60,6 +58,9 @@ export default {
         constrainResolution: true
       }),
     })
+
+    // add the vector layer to the map
+    this.olMap.addLayer(this.vectorLayer);
 
     // add the vector layer to the map
     if (this.geojson) {
