@@ -14,20 +14,22 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@turf/boolean-valid": "^6.5.0",
+    "@turf/turf": "^6.5.0",
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
-    "happy-dom": "^6.0.4",
+    "happy-dom": "^9.20.3",
     "qs": "^6.11.2",
-    "vue": "^3.2.47",
+    "vue": "^3.3.4",
     "vue3-openlayers": "^0.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/test-utils": "^2.3.2",
     "sass": "^1.62.1",
-    "vite": "^4.3.4",
-    "vitest": "^0.31.1"
+    "vite": "^4.3.9",
+    "vitest": "^0.31.4"
   }
 }

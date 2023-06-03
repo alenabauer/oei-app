@@ -1,6 +1,5 @@
 <template>
   <div class="file-upload">
-    <!--  TODO: improve validation of the file extension -->
     <input class="file-upload__input" id="file-upload__input" accept=".geojson" type="file" @change="handleFileUpload"/>
     <label for="file-upload__input">
       <font-awesome-icon icon="fa-solid fa-upload" />
@@ -13,33 +12,50 @@
 </template>
 
 <script>
+import booleanValid from '@turf/boolean-valid'
 export default {
   name: 'MoleculeFileUploader',
   data() {
     return {
       error: null,
-      fileName: null
+      fileName: null,
+      geojson: null,
     }
   },
   methods: {
     handleFileUpload(event) {
       const file = event.target.files[0]
-      this.fileName = file.name
       const reader = new FileReader()
       reader.onload = () => {
         try {
           const data = JSON.parse(reader.result)
-          if (data.type == 'FeatureCollection') {
-            this.$emit('data-upload', data.features?.[0])
-          } else if (data.type == 'Feature') {
-            this.$emit('data-upload', data)
-          }
-          this.error = null
+          this.processData(data, file.name)
         } catch (e) {
-          this.error = 'Error: Invalid format'
+          this.error = e.message
         }
       }
       reader.readAsText(file)
+    },
+    processData(data, fileName) {
+      this.geojson = data.type === 'FeatureCollection' ? data.features?.[0] : data
+
+      if (this.geojson && this.isGeoJSONValid(this.geojson)) {
+        this.$emit('data-upload', this.geojson)
+      } else {
+        this.error = 'Error: Invalid GeoJSON format'
+        return
+      }
+
+      this.fileName = fileName
+      this.error = null;
+    },
+    isGeoJSONValid(geojson) {
+      try {
+        return booleanValid(geojson)
+      } catch (e) {
+        console.error('Error validating GeoJSON', e)
+        return false
+      }
     }
   }
 }
